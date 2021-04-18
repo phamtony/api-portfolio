@@ -1,0 +1,86 @@
+List out features for API
+-Forms for each part of the portfolio
+    -General Info
+        -Name
+        -Occupation
+        -Email
+        -Github
+        -Linkedin
+    -Intro
+        -Text
+    -About Me
+        -Image
+        -Intro 1st section
+        -List of skills from work
+        -2nd pg (optional)
+        -List of skills (optional)
+    -Experience
+        -Company Name
+        -Job Position
+        -Time
+        -Company link
+        -Intro 1st section
+        -List
+        -2nd section (optional)
+        -2nd List
+    -Skills
+        -Language
+        -Framework/Library
+        -Database
+        -Misc
+    -Education
+        -School
+        -Time
+        -Degree
+    -Project
+        -Image
+        -Title
+        -Description
+        -List of tech
+        -Github project link
+-GET (Providing service of everything stated above.
+-POST, PUT, DELETE
+-Model the porfolio
+-Authentication
+    -Model for the user
+    -Include API key
+
+Template
+-Have one template that shows all the info I inputted. It'll be a test of what and how it can be displayed on the front-end.
+
+Model
+-SQLite + SQLAlchemy
+-Change database to postgresql when deployed
+
+Set-up classes
+-Form Generation
+-Models
+-Routes (main.py)
+
+Setup file structure
+
+
+Get required plugins, requirement.txt
+gunicorn==20.1.0 #Deployment with heroku
+certifi==2020.6.20
+chardet==3.0.4
+click==7.1.2
+dominate==2.5.2
+Flask==1.1.2 #framework
+Flask-Bootstrap==3.3.7.1 #bootstrap framework
+Flask-CKEditor==0.4.4.1 #for forms, text editor
+Flask-Login==0.5.0 #user login
+Flask-SQLAlchemy==2.4.4 #ORM
+Flask-WTF==0.14.3 #Forms
+idna==2.10
+itsdangerous==1.1.0
+Jinja2==2.11.2 #Templates
+MarkupSafe==1.1.1
+requests==2.24.0
+SQLAlchemy==1.3.19 #ORM
+urllib3==1.25.10
+visitor==0.1.3
+Werkzeug==1.0.1 #Hash
+WTForms==2.3.3 #Forms
+email-validator==1.1.2 #Email validator in forms
+psycopg2-binary==2.8.6
