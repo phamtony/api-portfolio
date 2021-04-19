@@ -52,6 +52,8 @@ Model
 -SQLite + SQLAlchemy
 -Change database to postgresql when deployed
 
+Refactor
+
 
 
 Set-up classes
