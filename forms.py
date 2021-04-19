@@ -15,9 +15,7 @@ class GeneralForm(FlaskForm):
 
 class AboutForm(FlaskForm):
     intro = CKEditorField("Intro")
-    # Fix this later to upload file
-    # image = FileField()
-    image = StringField("Image path")
+    image = FileField()
     section_one = CKEditorField("Section One")
     skills_work = StringField("List skills, use ',' to separate.")
     section_two = CKEditorField("Section Two")

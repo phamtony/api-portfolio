@@ -8,6 +8,9 @@
         <div class="row">
             <div class="col-12">
                 <h1>About Info</h1>
+                {% if image %}
+                    <p>Image: <img src="/static/images/{{ image }}" alt=""></p>
+                {% endif %}
                 {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
                 <p><a href="{{ url_for('home') }}">Go Back</a></p>
             </div>

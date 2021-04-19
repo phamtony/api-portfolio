@@ -75,12 +75,11 @@ def edit_general():
 def about():
     form = AboutForm()
     if request.method == "POST" and form.validate_on_submit():
-        # Fix the form later to upload instead of string path
-        # file = request.files['image']
-        # file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        file = request.files['image']
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
         new_about = About(
             intro=form.intro.data,
-            image=form.image.data,
+            image=file.filename,
             section_one=form.section_one.data,
             skills_work=form.skills_work.data,
             section_two=form.section_two.data,
@@ -96,24 +95,28 @@ def about():
 @app.route("/edit-about", methods=["GET", "POST"])
 def edit_about():
     about_info = About.query.get(user_id)
+    image = about_info.image
     edit_about = AboutForm(
         intro=about_info.intro,
-        image=about_info.image,
+        image=None,
         section_one=about_info.section_one,
         skills_work=about_info.skills_work,
         section_two=about_info.section_two,
         skills_goto=about_info.skills_goto,
     )
     if edit_about.validate_on_submit():
+        file = request.files['image']
+        if file:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+            about_info.image = file.filename
         about_info.intro = edit_about.intro.data
-        about_info.image = edit_about.image.data
         about_info.section_one = edit_about.section_one.data
         about_info.skills_work = edit_about.skills_work.data
         about_info.section_two = edit_about.section_two.data
         about_info.skills_goto = edit_about.skills_goto.data
         db.session.commit()
         return redirect(url_for("home"))
-    return render_template("about.html", form=edit_about)
+    return render_template("about.html", form=edit_about, image=image)
 
 
 if __name__ == "__main__":

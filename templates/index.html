@@ -5,24 +5,62 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-xs-12">
                 <h1>Portfolio Data</h1>
-                <p>Name: {{ general_info.name }}</p>
-                <p>Occupation: {{ general_info.occupation }}</p>
-                <p>Email: {{ general_info.email }}</p>
-                <p>Github: {{ general_info.github }}</p>
-                <p>Linkedin: {{ general_info.linkedin }}</p>
-                <p>Intro: {{ about_info.intro }}</p>
-                <p>Image: <br><img style="width: 100px;" src="{{ about_info.image }}" alt=""></p>
-                <p>Section One: {{ about_info.section_one }}</p>
-                <p>Skills Work: {{ about_info.skills_work }}</p>
-                <p>Section Two: {{ about_info.section_two }}</p>
-                <p>Goto Skills: {{ about_info.skills_goto }}</p>
+
+                <h3>General</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Occupation</th>
+                        <th>Email</th>
+                        <th>Github</th>
+                        <th>Linkedin</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>{{ general_info.name }}</td>
+                        <td>{{ general_info.occupation }}</td>
+                        <td>{{ general_info.email }}</td>
+                        <td>{{ general_info.github }}</td>
+                        <td>{{ general_info.linkedin }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <h3>About</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Intro</th>
+                        <th>Image</th>
+                        <th>Section 1</th>
+                        <th>Skills Work</th>
+                        <th>Section 2</th>
+                        <th>Goto Skills</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>{{ about_info.intro }}</td>
+                        <td><img style="width: 100px;" src="/static/images/{{ about_info.image }}" alt=""></td>
+                        <td>{{ about_info.section_one }}</td>
+                        <td>{{ about_info.skills_work }}</td>
+                        <td>{{ about_info.section_two }}</td>
+                        <td>{{ about_info.skills_goto }}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-xs-12">
                 <h2>Porfolio Input</h2>
                 <ul class="list-unstyled">
                     {% if general_info %}
@@ -30,6 +68,7 @@
                     {% else %}
                         <li><a href="{{ url_for('general') }}"><p>General</p></a></li>
                     {% endif %}
+
                     {% if about_info %}
                         <li><a href="{{ url_for('edit_about') }}"><p>About</p></a></li>
                     {% else %}
