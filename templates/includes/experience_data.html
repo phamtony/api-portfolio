@@ -1,0 +1,41 @@
+ {% if experiences %}
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Company Name</th>
+        <th>Position</th>
+        <th>Time</th>
+        <th>Link</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for experience in experiences %}
+        <tr>
+            <td>
+                {{ experience.name }}
+            </td>
+        <td>
+                {{ experience.position }}
+            </td>
+        <td>
+                {{ experience.time }}
+            </td>
+        <td>
+                {{ experience.link }}
+            </td>
+        <td>
+                {{ experience.description|safe }}
+            </td>
+        <td>
+            <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endif %}
+
+<a href="{{ url_for('add_experience') }}"><button type="button" class="btn btn-primary">Add Experience</button></a>

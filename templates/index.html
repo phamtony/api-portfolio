@@ -9,74 +9,25 @@
                 <h1>Portfolio Data</h1>
 
                 <h3>General</h3>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Occupation</th>
-                        <th>Email</th>
-                        <th>Github</th>
-                        <th>Linkedin</th>
-                    </tr>
-                    </thead>
+                {% if general_info %}
+                    {% include'/includes/general_data.html' %}
 
-                    <tbody>
-                    <tr>
-                        <td>{{ general_info.name }}</td>
-                        <td>{{ general_info.occupation }}</td>
-                        <td>{{ general_info.email }}</td>
-                        <td>{{ general_info.github }}</td>
-                        <td>{{ general_info.linkedin }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <h3 style="margin-top: 50px;">About</h3>
+                    {% include'/includes/about_data.html' %}
 
+                    <h3 style="margin-top: 50px;">Experience</h3>
+                    {% include'/includes/experience_data.html' %}
 
-                <h3>About</h3>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Intro</th>
-                        <th>Image</th>
-                        <th>Section 1</th>
-                        <th>Skills Work</th>
-                        <th>Section 2</th>
-                        <th>Goto Skills</th>
-                    </tr>
-                    </thead>
+                    <h3 style="margin-top: 50px;">Education</h3>
+                    {% include'/includes/education_data.html' %}
 
-                    <tbody>
-                    <tr>
-                        <td>{{ about_info.intro }}</td>
-                        <td><img style="width: 100px;" src="/static/images/{{ about_info.image }}" alt=""></td>
-                        <td>{{ about_info.section_one }}</td>
-                        <td>{{ about_info.skills_work }}</td>
-                        <td>{{ about_info.section_two }}</td>
-                        <td>{{ about_info.skills_goto }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                {% else %}
+                    <a href="{{ url_for('general') }}"><button type="button" class="btn btn-primary">Add General Info</button></a>
+                {% endif %}
+
             </div>
         </div>
 
-        <div class="row" style="margin-top: 50px;">
-            <div class="col-xs-12">
-                <h2>Porfolio Input</h2>
-                <ul class="list-unstyled">
-                    {% if general_info %}
-                        <li><a href="{{ url_for('edit_general') }}"><p>General</p></a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('general') }}"><p>General</p></a></li>
-                    {% endif %}
-
-                    {% if about_info %}
-                        <li><a href="{{ url_for('edit_about') }}"><p>About</p></a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('about') }}"><p>About</p></a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
     </div>
 
 {% endblock %}

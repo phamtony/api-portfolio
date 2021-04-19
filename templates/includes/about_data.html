@@ -1,0 +1,29 @@
+{% if about_info %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Intro</th>
+            <th>Image</th>
+            <th>Section 1</th>
+            <th>Skills Work</th>
+            <th>Section 2</th>
+            <th>Goto Skills</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>{{ about_info.intro }}</td>
+            <td><img style="width: 100px;" src="/static/images/{{ about_info.image }}" alt=""></td>
+            <td>{{ about_info.section_one }}</td>
+            <td>{{ about_info.skills_work }}</td>
+            <td>{{ about_info.section_two }}</td>
+            <td>{{ about_info.skills_goto }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('edit_about') }}"><button type="button" class="btn btn-primary">Edit About Info</button></a>
+{% else %}
+    <a href="{{ url_for('about') }}"><button type="button" class="btn btn-primary">Add About Info</button></a>
+{% endif %}

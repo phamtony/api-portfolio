@@ -1,0 +1,33 @@
+{% if education_list %}
+     <table class="table">
+    <thead>
+    <tr>
+        <th>School Name</th>
+        <th>Duration</th>
+        <th>Degree</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for education in education_list %}
+        <tr>
+            <td>
+                {{ education.school }}
+            </td>
+        <td>
+                {{ education.time }}
+            </td>
+        <td>
+                {{ education.degree }}
+            </td>
+        <td>
+            <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
+        </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endif %}
+
+<a href="{{ url_for('add_education') }}"><button type="button" class="btn btn-primary">Add Education</button></a>

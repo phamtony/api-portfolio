@@ -4,8 +4,8 @@ from flask_ckeditor import CKEditor
 from datetime import date
 import os
 
-from model import db, General, About
-from forms import GeneralForm, AboutForm
+from model import db, General, About, Experience, Education
+from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm
 
 UPLOAD_FOLDER = './static/images/'
 
@@ -23,13 +23,17 @@ with app.app_context():
     db.create_all()
 
 #Refactor later with authentication and login
+# Be sure to show education and experience related to current ID.
 user_id = 1
+
 
 @app.route("/")
 def home():
     general = General.query.get(user_id)
     about = About.query.get(user_id)
-    return render_template("index.html", general_info=general, about_info=about)
+    experiences = Experience.query.all()
+    education = Education.query.all()
+    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education)
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -117,6 +121,46 @@ def edit_about():
         db.session.commit()
         return redirect(url_for("home"))
     return render_template("about.html", form=edit_about, image=image)
+
+
+@app.route("/experience", methods=["GET", "POST"])
+def add_experience():
+    #Refactor later with authentication and login
+    general = General.query.get(user_id)
+    form = ExperienceForm()
+    if request.method == "POST" and form.validate_on_submit():
+        new_experience = Experience(
+            name=form.name.data,
+            position=form.position.data,
+            time=form.time.data,
+            link=form.link.data,
+            description=form.description.data,
+            general=general,
+        )
+        db.session.add(new_experience)
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("experience.html", form=form)
+
+
+@app.route("/education", methods=["GET", "POST"])
+def add_education():
+    # Refactor later with authentication and login
+    general = General.query.get(user_id)
+    form = EducationForm()
+    if request.method == "POST" and form.validate_on_submit():
+        new_education = Education(
+            school=form.school.data,
+            time=form.time.data,
+            degree=form.degree.data,
+            general=general,
+        )
+        db.session.add(new_education)
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("education.html", form=form)
 
 
 if __name__ == "__main__":
