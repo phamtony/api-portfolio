@@ -7,13 +7,17 @@
         <div class="row">
             <div class="col-12">
                 <h1>Portfolio Data</h1>
-                {% for info in general_info %}
-                    <p>Name: {{ info.name }}</p>
-                    <p>Occupation: {{ info.occupation }}</p>
-                    <p>Email: {{ info.email }}</p>
-                    <p>Github: {{ info.github }}</p>
-                    <p>Linkedin: {{ info.linkedin }}</p>
-                {% endfor %}
+                <p>Name: {{ general_info.name }}</p>
+                <p>Occupation: {{ general_info.occupation }}</p>
+                <p>Email: {{ general_info.email }}</p>
+                <p>Github: {{ general_info.github }}</p>
+                <p>Linkedin: {{ general_info.linkedin }}</p>
+                <p>Intro: {{ about_info.intro }}</p>
+                <p>Image: <br><img style="width: 100px;" src="{{ about_info.image }}" alt=""></p>
+                <p>Section One: {{ about_info.section_one }}</p>
+                <p>Skills Work: {{ about_info.skills_work }}</p>
+                <p>Section Two: {{ about_info.section_two }}</p>
+                <p>Goto Skills: {{ about_info.skills_goto }}</p>
             </div>
         </div>
 
@@ -21,7 +25,16 @@
             <div class="col-12">
                 <h2>Porfolio Input</h2>
                 <ul class="list-unstyled">
-                    <li><a href="{{ url_for('generalForm') }}"><p>General</p></a></li>
+                    {% if general_info %}
+                        <li><a href="{{ url_for('edit_general') }}"><p>General</p></a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('general') }}"><p>General</p></a></li>
+                    {% endif %}
+                    {% if about_info %}
+                        <li><a href="{{ url_for('edit_about') }}"><p>About</p></a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('about') }}"><p>About</p></a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

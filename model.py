@@ -11,3 +11,13 @@ class General(db.Model):
     email = db.Column(db.String(100))
     github = db.Column(db.String(100))
     linkedin = db.Column(db.String(100))
+
+
+class About(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    intro = db.Column(db.String(1000))
+    image = db.Column(db.String(250))
+    section_one = db.Column(db.String(500))
+    skills_work = db.Column(db.String(250))
+    section_two = db.Column(db.String(500))
+    skills_goto = db.Column(db.String(250))
