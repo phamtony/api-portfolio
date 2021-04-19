@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Portfolio Data{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Portfolio Data</h1>
+                <p>Data goes here</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h2>Porfolio Input</h2>
+                <ul class="list-unstyled">
+                    <li><a href="{{ url_for('generalForm') }}">General</a></li>
+                    <li>a form</li>
+                    <li>a form</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
