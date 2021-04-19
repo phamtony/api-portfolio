@@ -105,7 +105,7 @@ def edit_about():
         skills_goto=about_info.skills_goto,
     )
     if edit_about.validate_on_submit():
-        about_info.name = edit_about.intro.data
+        about_info.intro = edit_about.intro.data
         about_info.image = edit_about.image.data
         about_info.section_one = edit_about.section_one.data
         about_info.skills_work = edit_about.skills_work.data
@@ -113,7 +113,7 @@ def edit_about():
         about_info.skills_goto = edit_about.skills_goto.data
         db.session.commit()
         return redirect(url_for("home"))
-    return render_template("about.html", form=edit_general)
+    return render_template("about.html", form=edit_about)
 
 
 if __name__ == "__main__":
