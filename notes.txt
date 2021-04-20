@@ -1,4 +1,14 @@
 List out features for API
+
+Authentication
+    -Model for the user
+
+Refactor
+
+Get it ready for service
+
+
+
 -Forms for each part of the portfolio
     -General Info
         -Name
@@ -41,21 +51,14 @@ List out features for API
         -List of tech
 -GET (Providing service of everything above.)
 -POST, PUT, DELETE
--Authentication
-    -Model for the user
-    -Include API key
-
-Template
--Have one template that shows all the info I inputted. It'll be a test of what and how it can be displayed on the front-end.
 
 Model
 -SQLite + SQLAlchemy
 -Change database to postgresql when deployed
 -Model App
 
-Refactor
-
-
+Template
+-Have one template that shows all the info I inputted. It'll be a test of what and how it can be displayed on the front-end.
 
 Set-up classes
 -Form Generation
