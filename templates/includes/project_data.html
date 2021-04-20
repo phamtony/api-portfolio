@@ -23,6 +23,7 @@
             <td>{{ project.tech_list }}</td>
         <td>
             <a href="{{ url_for('edit_project', id=project.id) }}"><button type="button" class="btn btn-light">Edit</button></a>
+            <a href="{{ url_for('delete_project', id=project.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
         </td>
         </tr>
     {% endfor %}

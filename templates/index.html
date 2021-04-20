@@ -6,23 +6,33 @@
     <div class="container" style="margin-bottom: 50px;">
         <div class="row">
             <div class="col-xs-12">
-                <h1>Portfolio Data</h1>
+                <h1 style="padding-bottom: 30px;">Portfolio Data</h1>
 
                 <h3>General</h3>
                 {% if general_info %}
                     {% include'/includes/general_data.html' %}
 
+                    <hr>
+
                     <h3 style="margin-top: 50px;">About</h3>
                     {% include'/includes/about_data.html' %}
+
+                    <hr>
 
                     <h3 style="margin-top: 50px;">Experience</h3>
                     {% include'/includes/experience_data.html' %}
 
+                    <hr>
+
                     <h3 style="margin-top: 50px;">Education</h3>
                     {% include'/includes/education_data.html' %}
 
+                    <hr>
+
                     <h3 style="margin-top: 50px;">Skills</h3>
                     {% include'/includes/skills_data.html' %}
+
+                    <hr>
 
                     <h3 style="margin-top: 50px;">Projects</h3>
                     {% include'/includes/project_data.html' %}

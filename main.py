@@ -127,6 +127,14 @@ def edit_about():
     return render_template("form_template.html", form=edit_about, image=image, title="About")
 
 
+@app.route("/delete-about")
+def delete_about():
+    about_info = About.query.get(user_id)
+    db.session.delete(about_info)
+    db.session.commit()
+    return redirect((url_for("home")))
+
+
 @app.route("/experience", methods=["GET", "POST"])
 def add_experience():
     #Refactor later with authentication and login
@@ -148,26 +156,7 @@ def add_experience():
     return render_template("form_template.html", form=form, title="Experience")
 
 
-@app.route("/education", methods=["GET", "POST"])
-def add_education():
-    # Refactor later with authentication and login
-    general = General.query.get(user_id)
-    form = EducationForm()
-    if request.method == "POST" and form.validate_on_submit():
-        new_education = Education(
-            school=form.school.data,
-            time=form.time.data,
-            degree=form.degree.data,
-            general=general,
-        )
-        db.session.add(new_education)
-        db.session.commit()
-        return redirect(url_for("home"))
-
-    return render_template("form_template.html", form=form, title="Education")
-
-
-@app.route('/experience/<int:id>', methods=["GET", "POST"])
+@app.route('/edit-experience/<int:id>', methods=["GET", "POST"])
 def edit_experience(id):
     experience = Experience.query.get(id)
     edit_experience = ExperienceForm(
@@ -189,7 +178,34 @@ def edit_experience(id):
     return render_template("form_template.html", form=edit_experience, title="Experience")
 
 
-@app.route('/education/<int:id>', methods=["GET", "POST"])
+@app.route('/delete-experience/<int:id>')
+def delete_experience(id):
+    experience_info = Experience.query.get(id)
+    db.session.delete(experience_info)
+    db.session.commit()
+    return redirect(url_for("home"))
+
+
+@app.route("/education", methods=["GET", "POST"])
+def add_education():
+    # Refactor later with authentication and login
+    general = General.query.get(user_id)
+    form = EducationForm()
+    if request.method == "POST" and form.validate_on_submit():
+        new_education = Education(
+            school=form.school.data,
+            time=form.time.data,
+            degree=form.degree.data,
+            general=general,
+        )
+        db.session.add(new_education)
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("form_template.html", form=form, title="Education")
+
+
+@app.route('/edit-education/<int:id>', methods=["GET", "POST"])
 def edit_education(id):
     education = Education.query.get(id)
     edit_education = EducationForm(
@@ -205,6 +221,14 @@ def edit_education(id):
         return redirect(url_for("home"))
 
     return render_template("form_template.html", form=edit_education, title="Education")
+
+
+@app.route('/delete-education/<int:id>', methods=["GET", "POST"])
+def delete_education(id):
+    education_info = Education.query.get(id)
+    db.session.delete(education_info)
+    db.session.commit()
+    return redirect(url_for("home"))
 
 
 @app.route("/skills", methods=["GET", "POST"])
@@ -245,6 +269,14 @@ def edit_skills():
     return render_template("form_template.html", form=edit_skills, title="Skills")
 
 
+@app.route("/delete-skills")
+def delete_skills():
+    skills_info = Skills.query.get(user_id)
+    db.session.delete(skills_info)
+    db.session.commit()
+    return redirect(url_for("home"))
+
+
 @app.route("/project", methods=["GET", "POST"])
 def add_project():
     general = General.query.get(user_id)
@@ -271,7 +303,7 @@ def add_project():
     return render_template("form_template.html", form=form, title="Project")
 
 
-@app.route("/projects/<int:id>", methods=["GET", "POST"])
+@app.route("/edit-project/<int:id>", methods=["GET", "POST"])
 def edit_project(id):
     project_info = Project.query.get(id)
     image = project_info.screenshot
@@ -299,12 +331,24 @@ def edit_project(id):
     return render_template("form_template.html", form=edit_project, title="Project", image=image)
 
 
-@app.route('/json-test')
-def json_test():
-    skills = Skills.query.get(user_id)
-    general = General.query.get(user_id)
-    about = About.query.get(user_id)
-    return jsonify(skills=skills.to_dict(), general=general.to_dict(), about=about.to_dict())
+@app.route("/delete-project/<int:id>")
+def delete_project(id):
+    project_info = Project.query.get(id)
+    db.session.delete(project_info)
+    db.session.commit()
+    return redirect(url_for("home"))
+
+
+@app.route('/json')
+def json_reveal():
+    skills = Skills.query.get(user_id).to_dict()
+    general = General.query.get(user_id).to_dict()
+    about = About.query.get(user_id).to_dict()
+    experience = [experience.to_dict() for experience in Experience.query.all()]
+    education = [ed.to_dict() for ed in Education.query.all()]
+    projects = [project.to_dict() for project in Project.query.all()]
+
+    return jsonify(skills=skills, general=general, about=about, experience=experience, education=education, projects=projects)
 
 
 if __name__ == "__main__":
