@@ -45,3 +45,13 @@ class SkillsForm(FlaskForm):
     database = StringField("Database")
     misc = StringField("Misc")
     submit = SubmitField("Submit")
+
+
+class ProjectForm(FlaskForm):
+    name = StringField("Project Name")
+    link = StringField("Project Link")
+    github_link = StringField("Github Link")
+    screenshot = FileField()
+    description = StringField("Project Description")
+    tech_list = StringField("List Of Tech")
+    submit = SubmitField("Submit")

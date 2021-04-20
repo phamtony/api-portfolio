@@ -33,7 +33,8 @@ def home():
     experiences = Experience.query.all()
     education = Education.query.all()
     skills = Skills.query.get(user_id)
-    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills)
+    projects = Project.query.all()
+    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -80,7 +81,10 @@ def about():
     form = AboutForm()
     if request.method == "POST" and form.validate_on_submit():
         file = request.files['image']
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        if file:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        else:
+            file.filename = None
         new_about = About(
             intro=form.intro.data,
             image=file.filename,
@@ -241,10 +245,66 @@ def edit_skills():
     return render_template("form_template.html", form=edit_skills, title="Skills")
 
 
+@app.route("/project", methods=["GET", "POST"])
+def add_project():
+    general = General.query.get(user_id)
+    form = ProjectForm()
+    if request.method == "POST" and form.validate_on_submit():
+        file = request.files['screenshot']
+        if file:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        else:
+            file.filename = None
+        new_project = Project(
+            name=form.name.data,
+            link=form.link.data,
+            github_link=form.github_link.data,
+            screenshot=file.filename,
+            description=form.description.data,
+            tech_list=form.tech_list.data,
+            general=general,
+        )
+        db.session.add(new_project)
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("form_template.html", form=form, title="Project")
+
+
+@app.route("/projects/<int:id>", methods=["GET", "POST"])
+def edit_project(id):
+    project_info = Project.query.get(id)
+    image = project_info.screenshot
+    edit_project = ProjectForm(
+        name=project_info.name,
+        link=project_info.link,
+        github_link=project_info.github_link,
+        screenshot=None,
+        description=project_info.description,
+        tech_list=project_info.tech_list,
+    )
+    if edit_project.validate_on_submit():
+        file = request.files['screenshot']
+        if file:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+            project_info.screenshot = file.filename
+        project_info.name = edit_project.name.data
+        project_info.link = edit_project.link.data
+        project_info.github_link = edit_project.github_link.data
+        project_info.description = edit_project.description.data
+        project_info.tech_list = edit_project.tech_list.data
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("form_template.html", form=edit_project, title="Project", image=image)
+
+
 @app.route('/json-test')
 def json_test():
     skills = Skills.query.get(user_id)
-    return jsonify(skills=skills.to_dict())
+    general = General.query.get(user_id)
+    about = About.query.get(user_id)
+    return jsonify(skills=skills.to_dict(), general=general.to_dict(), about=about.to_dict())
 
 
 if __name__ == "__main__":

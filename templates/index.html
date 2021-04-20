@@ -21,8 +21,11 @@
                     <h3 style="margin-top: 50px;">Education</h3>
                     {% include'/includes/education_data.html' %}
 
-                    <h3 style="margin-top: 50px;">Education</h3>
+                    <h3 style="margin-top: 50px;">Skills</h3>
                     {% include'/includes/skills_data.html' %}
+
+                    <h3 style="margin-top: 50px;">Projects</h3>
+                    {% include'/includes/project_data.html' %}
                 {% else %}
                     <a href="{{ url_for('general') }}"><button type="button" class="btn btn-primary">Add General Info</button></a>
                 {% endif %}
