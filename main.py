@@ -1,11 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, abort
+from flask import Flask, render_template, jsonify, redirect, url_for, flash, request, abort
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
-from datetime import date
 import os
 
-from model import db, General, About, Experience, Education, Skills
-from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm
+from model import db, General, About, Experience, Education, Skills, Project
+from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm
 
 UPLOAD_FOLDER = './static/images/'
 
@@ -52,7 +51,7 @@ def general():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("general.html", form=form)
+    return render_template("form_template.html", form=form, title="General")
 
 
 @app.route("/edit-general", methods=["GET", "POST"])
@@ -73,7 +72,7 @@ def edit_general():
         general_info.linkedin = edit_general.linkedin.data
         db.session.commit()
         return redirect(url_for("home"))
-    return render_template("general.html", form=edit_general)
+    return render_template("form_template.html", form=edit_general, title="General")
 
 
 @app.route("/about", methods=["GET", "POST"])
@@ -94,7 +93,7 @@ def about():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("about.html", form=form)
+    return render_template("form_template.html", form=form, title="About")
 
 
 @app.route("/edit-about", methods=["GET", "POST"])
@@ -121,7 +120,7 @@ def edit_about():
         about_info.skills_goto = edit_about.skills_goto.data
         db.session.commit()
         return redirect(url_for("home"))
-    return render_template("about.html", form=edit_about, image=image)
+    return render_template("form_template.html", form=edit_about, image=image, title="About")
 
 
 @app.route("/experience", methods=["GET", "POST"])
@@ -142,7 +141,7 @@ def add_experience():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("experience.html", form=form)
+    return render_template("form_template.html", form=form, title="Experience")
 
 
 @app.route("/education", methods=["GET", "POST"])
@@ -161,7 +160,7 @@ def add_education():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("education.html", form=form)
+    return render_template("form_template.html", form=form, title="Education")
 
 
 @app.route('/experience/<int:id>', methods=["GET", "POST"])
@@ -183,7 +182,7 @@ def edit_experience(id):
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("experience.html", form=edit_experience)
+    return render_template("form_template.html", form=edit_experience, title="Experience")
 
 
 @app.route('/education/<int:id>', methods=["GET", "POST"])
@@ -201,7 +200,7 @@ def edit_education(id):
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("education.html", form=edit_education)
+    return render_template("form_template.html", form=edit_education, title="Education")
 
 
 @app.route("/skills", methods=["GET", "POST"])
@@ -218,7 +217,7 @@ def skills():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("skills.html", form=form)
+    return render_template("form_template.html", form=form, title="Skills")
 
 
 @app.route("/edit-skills", methods=["GET", "POST"])
@@ -239,7 +238,13 @@ def edit_skills():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("skills.html", form=edit_skills)
+    return render_template("form_template.html", form=edit_skills, title="Skills")
+
+
+@app.route('/json-test')
+def json_test():
+    skills = Skills.query.get(user_id)
+    return jsonify(skills=skills.to_dict())
 
 
 if __name__ == "__main__":

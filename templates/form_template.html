@@ -7,7 +7,18 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Education Info</h1>
+                <h1>{{ title }} Info</h1>
+
+                {% if title == "About" %}
+                    {% if image %}
+                        <p>Image: <img src="/static/images/{{ image }}" alt=""></p>
+                    {% endif %}
+                {% endif %}
+
+                {% if title == "Experience" %}
+                    {{ ckeditor.load() }}
+                    {{ ckeditor.config(name='body') }}
+                {% endif %}
                 {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
                 <a href="{{ url_for('home') }}"><button type="button" class="btn btn-default">Go Back</button></a>
             </div>

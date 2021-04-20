@@ -33,14 +33,14 @@ List out features for API
         -Time
         -Degree
     -Project
-        -Image
-        -Title
+        -Project Name
+        -Project Link (If it's live)
+        -Github link
+        -Screenshot
         -Description
         -List of tech
-        -Github project link
--GET (Providing service of everything stated above.
+-GET (Providing service of everything above.)
 -POST, PUT, DELETE
--Model the porfolio
 -Authentication
     -Model for the user
     -Include API key
@@ -51,6 +51,7 @@ Template
 Model
 -SQLite + SQLAlchemy
 -Change database to postgresql when deployed
+-Model App
 
 Refactor
 
