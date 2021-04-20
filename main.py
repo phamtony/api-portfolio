@@ -4,8 +4,8 @@ from flask_ckeditor import CKEditor
 from datetime import date
 import os
 
-from model import db, General, About, Experience, Education
-from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm
+from model import db, General, About, Experience, Education, Skills
+from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm
 
 UPLOAD_FOLDER = './static/images/'
 
@@ -33,7 +33,8 @@ def home():
     about = About.query.get(user_id)
     experiences = Experience.query.all()
     education = Education.query.all()
-    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education)
+    skills = Skills.query.get(user_id)
+    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills)
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -161,6 +162,84 @@ def add_education():
         return redirect(url_for("home"))
 
     return render_template("education.html", form=form)
+
+
+@app.route('/experience/<int:id>', methods=["GET", "POST"])
+def edit_experience(id):
+    experience = Experience.query.get(id)
+    edit_experience = ExperienceForm(
+        name=experience.name,
+        position=experience.position,
+        time=experience.time,
+        link=experience.link,
+        description=experience.description,
+    )
+    if edit_experience.validate_on_submit():
+        experience.name = edit_experience.name.data
+        experience.position = edit_experience.position.data
+        experience.time = edit_experience.time.data
+        experience.link = edit_experience.link.data
+        experience.description = edit_experience.description.data
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("experience.html", form=edit_experience)
+
+
+@app.route('/education/<int:id>', methods=["GET", "POST"])
+def edit_education(id):
+    education = Education.query.get(id)
+    edit_education = EducationForm(
+        school=education.school,
+        time=education.time,
+        degree=education.degree,
+    )
+    if edit_education.validate_on_submit():
+        education.school = edit_education.school.data
+        education.time = edit_education.time.data
+        education.degree = edit_education.degree.data
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("education.html", form=edit_education)
+
+
+@app.route("/skills", methods=["GET", "POST"])
+def skills():
+    form = SkillsForm()
+    if request.method == "POST" and form.validate_on_submit():
+        new_skills = Skills(
+            language=form.language.data,
+            framework_library=form.framework_library.data,
+            database=form.database.data,
+            misc=form.misc.data,
+        )
+        db.session.add(new_skills)
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("skills.html", form=form)
+
+
+@app.route("/edit-skills", methods=["GET", "POST"])
+def edit_skills():
+    skills_info = Skills.query.get(user_id)
+    edit_skills = SkillsForm(
+        language=skills_info.language,
+        framework_library=skills_info.framework_library,
+        database=skills_info.database,
+        misc=skills_info.misc,
+    )
+
+    if edit_skills.validate_on_submit():
+        skills_info.language = edit_skills.language.data
+        skills_info.framework_library = edit_skills.framework_library.data
+        skills_info.database = edit_skills.database.data
+        skills_info.misc = edit_skills.misc.data
+        db.session.commit()
+        return redirect(url_for("home"))
+
+    return render_template("skills.html", form=edit_skills)
 
 
 if __name__ == "__main__":

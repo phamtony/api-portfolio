@@ -37,3 +37,11 @@ class EducationForm(FlaskForm):
     time = StringField("Duration")
     degree = StringField("Degree")
     submit = SubmitField("Submit")
+
+
+class SkillsForm(FlaskForm):
+    language = StringField("Language")
+    framework_library = StringField("Framework/Library")
+    database = StringField("Database")
+    misc = StringField("Misc")
+    submit = SubmitField("Submit")

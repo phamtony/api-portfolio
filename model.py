@@ -54,3 +54,12 @@ class Education(db.Model):
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
     # Create reference to the General object, the "experience" refers to the experience property in the General class.
     general = relationship("General", back_populates="education")
+
+
+class Skills(db.Model):
+    __tablename__ = "skills"
+    id = db.Column(db.Integer, primary_key=True)
+    language = db.Column(db.String(500))
+    framework_library = db.Column(db.String(500))
+    database = db.Column(db.String(500))
+    misc = db.Column(db.String(500))

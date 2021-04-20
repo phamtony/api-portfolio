@@ -1,0 +1,25 @@
+{% if skills %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Language</th>
+            <th>Framework/Library</th>
+            <th>Database</th>
+            <th>Misc</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>{{ skills.language }}</td>
+            <td>{{ skills.framework_library }}</td>
+            <td>{{ skills.database }}</td>
+            <td>{{ skills.misc }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('edit_skills') }}"><button type="button" class="btn btn-light">Edit Skills Info</button></a>
+{% else %}
+    <a href="{{ url_for('skills') }}"><button type="button" class="btn btn-primary">Add Skills Info</button></a>
+{% endif %}

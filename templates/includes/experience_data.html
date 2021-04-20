@@ -30,7 +30,7 @@
                 {{ experience.description|safe }}
             </td>
         <td>
-            <a href=""><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="{{ url_for('edit_experience', id=experience.id) }}"><button type="button" class="btn btn-light">Edit</button></a>
         </td>
         </tr>
     {% endfor %}
