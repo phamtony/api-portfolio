@@ -7,7 +7,6 @@ Authentication
 Make accounts page
 
 Refactor
-
 Get it ready for service
 
 

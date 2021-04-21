@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 
+from flask_login import UserMixin
+
 db = SQLAlchemy()
 
 class ModelFunc():
@@ -11,7 +13,7 @@ class ModelFunc():
         return {column.name: getattr(self, column.name) for column in self.__table__.columns if column.name != "password"}
 
 
-class General(db.Model, ModelFunc):
+class General(db.Model, ModelFunc, UserMixin):
     __tablename__ = "general"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))

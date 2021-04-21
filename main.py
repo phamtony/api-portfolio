@@ -4,7 +4,7 @@ from flask_ckeditor import CKEditor
 import os
 
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_login import login_user, LoginManager, login_required, current_user, logout_user
 
 from model import db, General, About, Experience, Education, Skills, Project
 from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm
@@ -21,40 +21,84 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 with app.app_context():
     db.create_all()
 
-#Refactor later with authentication and login
-# Be sure to show education and experience related to current ID.
-user_id = 1
+
+@login_manager.user_loader
+def load_user(user_id):
+    return General.query.get(int(user_id))
 
 
 @app.route("/")
 def home():
-    general = General.query.get(user_id)
-    about = About.query.filter_by(general_id=user_id).first()
-    experiences = Experience.query.filter_by(general_id=user_id)
-    education = Education.query.filter_by(general_id=user_id)
-    skills = Skills.query.filter_by(general_id=user_id).first()
-    projects = Project.query.filter_by(general_id=user_id)
+    general = General.query.get(current_user.id)
+    about = About.query.filter_by(general_id=current_user.id).first()
+    experiences = Experience.query.filter_by(general_id=current_user.id)
+    education = Education.query.filter_by(general_id=current_user.id)
+    skills = Skills.query.filter_by(general_id=current_user.id).first()
+    projects = Project.query.filter_by(general_id=current_user.id)
     return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
+    if request.method == "POST" and form.validate_on_submit():
+        email = form.email.data
+        user = General.query.filter_by(email=email).first()
+        if user:
+            flash("This user already exist. Log in instead!")
+            return redirect(url_for("login"))
+
+        hash_pw = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
+
+        new_user = General(
+            name=form.name.data,
+            password=hash_pw,
+            email=form.email.data,
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
+        login_user(new_user)
+
+        return redirect(url_for("home"))
+
     return render_template("login_register.html", title="Register", form=form)
 
 
-@app.route("/login")
+@app.route('/login', methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("home"))
     form = LoginForm()
+    if request.method == "POST" and form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        user = General.query.filter_by(email=email).first()
+
+        if not user:
+            flash("Email does not exist. Please try again or register.")
+            return redirect(url_for("login"))
+
+        if check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for("home"))
+        else:
+            flash("Password incorrect, please try again.")
+            return redirect(url_for("login"))
+
     return render_template("login_register.html", title="Login", form=form)
 
 
 @app.route("/logout")
 def logout():
-    pass
+    logout_user()
+    return redirect(url_for("login"))
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -77,7 +121,7 @@ def general():
 
 @app.route("/edit-general", methods=["GET", "POST"])
 def edit_general():
-    general_info = General.query.get(user_id)
+    general_info = General.query.get(current_user.id)
     edit_general = GeneralForm(
         name=general_info.name,
         occupation=general_info.occupation,
@@ -99,7 +143,6 @@ def edit_general():
 @app.route("/about", methods=["GET", "POST"])
 def about():
     form = AboutForm()
-    general = General.query.get(user_id)
     if request.method == "POST" and form.validate_on_submit():
         file = request.files['image']
         if file:
@@ -113,7 +156,7 @@ def about():
             skills_work=form.skills_work.data,
             section_two=form.section_two.data,
             skills_goto=form.skills_goto.data,
-            general=general,
+            general=current_user,
         )
         db.session.add(new_about)
         db.session.commit()
@@ -124,7 +167,7 @@ def about():
 
 @app.route("/edit-about", methods=["GET", "POST"])
 def edit_about():
-    about_info = About.query.filter_by(general_id=user_id).first()
+    about_info = About.query.filter_by(general_id=current_user.id).first()
     image = about_info.image
     edit_about = AboutForm(
         intro=about_info.intro,
@@ -151,7 +194,7 @@ def edit_about():
 
 @app.route("/delete-about")
 def delete_about():
-    about_info = About.query.filter_by(general_id=user_id).first()
+    about_info = About.query.filter_by(general_id=current_user.id).first()
     db.session.delete(about_info)
     db.session.commit()
     return redirect((url_for("home")))
@@ -160,7 +203,6 @@ def delete_about():
 @app.route("/experience", methods=["GET", "POST"])
 def add_experience():
     #Refactor later with authentication and login
-    general = General.query.get(user_id)
     form = ExperienceForm()
     if request.method == "POST" and form.validate_on_submit():
         new_experience = Experience(
@@ -169,7 +211,7 @@ def add_experience():
             time=form.time.data,
             link=form.link.data,
             description=form.description.data,
-            general=general,
+            general=current_user,
         )
         db.session.add(new_experience)
         db.session.commit()
@@ -211,14 +253,13 @@ def delete_experience(id):
 @app.route("/education", methods=["GET", "POST"])
 def add_education():
     # Refactor later with authentication and login
-    general = General.query.get(user_id)
     form = EducationForm()
     if request.method == "POST" and form.validate_on_submit():
         new_education = Education(
             school=form.school.data,
             time=form.time.data,
             degree=form.degree.data,
-            general=general,
+            general=current_user,
         )
         db.session.add(new_education)
         db.session.commit()
@@ -256,14 +297,13 @@ def delete_education(id):
 @app.route("/skills", methods=["GET", "POST"])
 def skills():
     form = SkillsForm()
-    general = General.query.get(user_id)
     if request.method == "POST" and form.validate_on_submit():
         new_skills = Skills(
             language=form.language.data,
             framework_library=form.framework_library.data,
             database=form.database.data,
             misc=form.misc.data,
-            general=general,
+            general=current_user,
         )
         db.session.add(new_skills)
         db.session.commit()
@@ -274,7 +314,7 @@ def skills():
 
 @app.route("/edit-skills", methods=["GET", "POST"])
 def edit_skills():
-    skills_info = Skills.query.filter_by(general_id=user_id).first()
+    skills_info = Skills.query.filter_by(general_id=current_user.id).first()
     edit_skills = SkillsForm(
         language=skills_info.language,
         framework_library=skills_info.framework_library,
@@ -295,7 +335,7 @@ def edit_skills():
 
 @app.route("/delete-skills")
 def delete_skills():
-    skills_info = Skills.query.filter_by(general_id=user_id).first()
+    skills_info = Skills.query.filter_by(general_id=current_user.id).first()
     db.session.delete(skills_info)
     db.session.commit()
     return redirect(url_for("home"))
@@ -303,7 +343,6 @@ def delete_skills():
 
 @app.route("/project", methods=["GET", "POST"])
 def add_project():
-    general = General.query.get(user_id)
     form = ProjectForm()
     if request.method == "POST" and form.validate_on_submit():
         file = request.files['screenshot']
@@ -318,7 +357,7 @@ def add_project():
             screenshot=file.filename,
             description=form.description.data,
             tech_list=form.tech_list.data,
-            general=general,
+            general=current_user,
         )
         db.session.add(new_project)
         db.session.commit()
@@ -365,12 +404,18 @@ def delete_project(id):
 
 @app.route('/json')
 def json_reveal():
-    skills = Skills.query.filter_by(general_id=user_id).first().to_dict()
-    general = General.query.get(user_id).to_dict()
-    about = About.query.filter_by(general_id=user_id).first().to_dict()
-    experience = [experience.to_dict() for experience in Experience.query.filter_by(general_id=user_id)]
-    education = [ed.to_dict() for ed in Education.query.filter_by(general_id=user_id)]
-    projects = [project.to_dict() for project in Project.query.filter_by(general_id=user_id)]
+    skill_query = Skills.query.filter_by(general_id=current_user.id).first()
+    about_query = About.query.filter_by(general_id=current_user.id).first()
+    experience_query = Experience.query.filter_by(general_id=current_user.id)
+    education_query = Education.query.filter_by(general_id=current_user.id)
+    project_query = Project.query.filter_by(general_id=current_user.id)
+
+    general = General.query.get(current_user.id).to_dict()
+    skills = skill_query.to_dict() if skill_query else {}
+    about = about_query.to_dict() if about_query else {}
+    experience = [experience.to_dict() for experience in experience_query] if experience_query else {}
+    education = [ed.to_dict() for ed in education_query] if education_query else {}
+    projects = [project.to_dict() for project in project_query] if project_query else {}
 
     return jsonify(skills=skills, general=general, about=about, experience=experience, education=education, projects=projects)
 

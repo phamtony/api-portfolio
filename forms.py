@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, URL, Email
 from flask_ckeditor import CKEditorField
 import email_validator
 
+
 class GeneralForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     occupation = StringField("Occupation")
