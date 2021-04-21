@@ -23,6 +23,8 @@ class General(db.Model, ModelFunc):
     experience = relationship("Experience", back_populates="general")
     education = relationship("Education", back_populates="general")
     project = relationship("Project", back_populates="general")
+    about = relationship("About", uselist=False, back_populates="general")
+    skills = relationship("Skills", uselist=False, back_populates="general")
 
 
 class About(db.Model, ModelFunc):
@@ -35,6 +37,9 @@ class About(db.Model, ModelFunc):
     section_two = db.Column(db.String(500))
     skills_goto = db.Column(db.String(250))
 
+    general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
+    general = relationship("General", back_populates="about")
+
 
 class Experience(db.Model, ModelFunc):
     __tablename__ = "experience"
@@ -45,9 +50,7 @@ class Experience(db.Model, ModelFunc):
     link = db.Column(db.String(250))
     description = db.Column(db.String(1000))
 
-    # Create Foreign Key, "general.id" the users refers to the tablename of General.
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
-    # Create reference to the General object, the "experience" refers to the experience property in the General class.
     general = relationship("General", back_populates="experience")
 
 
@@ -58,9 +61,7 @@ class Education(db.Model, ModelFunc):
     time = db.Column(db.String(100))
     degree = db.Column(db.String(250))
 
-    # Create Foreign Key, "general.id" the users refers to the tablename of General.
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
-    # Create reference to the General object, the "education" refers to the education property in the General class.
     general = relationship("General", back_populates="education")
 
 
@@ -71,6 +72,9 @@ class Skills(db.Model, ModelFunc):
     framework_library = db.Column(db.String(500))
     database = db.Column(db.String(500))
     misc = db.Column(db.String(500))
+
+    general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
+    general = relationship("General", back_populates="skills")
 
 
 class Project(db.Model, ModelFunc):

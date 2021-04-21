@@ -3,8 +3,11 @@ from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 import os
 
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+
 from model import db, General, About, Experience, Education, Skills, Project
-from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm
+from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm
 
 UPLOAD_FOLDER = './static/images/'
 
@@ -29,12 +32,29 @@ user_id = 1
 @app.route("/")
 def home():
     general = General.query.get(user_id)
-    about = About.query.get(user_id)
-    experiences = Experience.query.all()
-    education = Education.query.all()
-    skills = Skills.query.get(user_id)
-    projects = Project.query.all()
-    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
+    about = About.query.filter_by(general_id=user_id).first()
+    experiences = Experience.query.filter_by(general_id=user_id)
+    education = Education.query.filter_by(general_id=user_id)
+    skills = Skills.query.filter_by(general_id=user_id).first()
+    projects = Project.query.filter_by(general_id=user_id)
+    return render_template("index.html", name=general.name, general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
+
+
+@app.route("/register")
+def register():
+    form = RegisterForm()
+    return render_template("login_register.html", title="Register", form=form)
+
+
+@app.route("/login")
+def login():
+    form = LoginForm()
+    return render_template("login_register.html", title="Login", form=form)
+
+
+@app.route("/logout")
+def logout():
+    pass
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -79,6 +99,7 @@ def edit_general():
 @app.route("/about", methods=["GET", "POST"])
 def about():
     form = AboutForm()
+    general = General.query.get(user_id)
     if request.method == "POST" and form.validate_on_submit():
         file = request.files['image']
         if file:
@@ -92,6 +113,7 @@ def about():
             skills_work=form.skills_work.data,
             section_two=form.section_two.data,
             skills_goto=form.skills_goto.data,
+            general=general,
         )
         db.session.add(new_about)
         db.session.commit()
@@ -102,7 +124,7 @@ def about():
 
 @app.route("/edit-about", methods=["GET", "POST"])
 def edit_about():
-    about_info = About.query.get(user_id)
+    about_info = About.query.filter_by(general_id=user_id).first()
     image = about_info.image
     edit_about = AboutForm(
         intro=about_info.intro,
@@ -129,7 +151,7 @@ def edit_about():
 
 @app.route("/delete-about")
 def delete_about():
-    about_info = About.query.get(user_id)
+    about_info = About.query.filter_by(general_id=user_id).first()
     db.session.delete(about_info)
     db.session.commit()
     return redirect((url_for("home")))
@@ -234,12 +256,14 @@ def delete_education(id):
 @app.route("/skills", methods=["GET", "POST"])
 def skills():
     form = SkillsForm()
+    general = General.query.get(user_id)
     if request.method == "POST" and form.validate_on_submit():
         new_skills = Skills(
             language=form.language.data,
             framework_library=form.framework_library.data,
             database=form.database.data,
             misc=form.misc.data,
+            general=general,
         )
         db.session.add(new_skills)
         db.session.commit()
@@ -250,7 +274,7 @@ def skills():
 
 @app.route("/edit-skills", methods=["GET", "POST"])
 def edit_skills():
-    skills_info = Skills.query.get(user_id)
+    skills_info = Skills.query.filter_by(general_id=user_id).first()
     edit_skills = SkillsForm(
         language=skills_info.language,
         framework_library=skills_info.framework_library,
@@ -271,7 +295,7 @@ def edit_skills():
 
 @app.route("/delete-skills")
 def delete_skills():
-    skills_info = Skills.query.get(user_id)
+    skills_info = Skills.query.filter_by(general_id=user_id).first()
     db.session.delete(skills_info)
     db.session.commit()
     return redirect(url_for("home"))
@@ -341,12 +365,12 @@ def delete_project(id):
 
 @app.route('/json')
 def json_reveal():
-    skills = Skills.query.get(user_id).to_dict()
+    skills = Skills.query.filter_by(general_id=user_id).first().to_dict()
     general = General.query.get(user_id).to_dict()
-    about = About.query.get(user_id).to_dict()
-    experience = [experience.to_dict() for experience in Experience.query.all()]
-    education = [ed.to_dict() for ed in Education.query.all()]
-    projects = [project.to_dict() for project in Project.query.all()]
+    about = About.query.filter_by(general_id=user_id).first().to_dict()
+    experience = [experience.to_dict() for experience in Experience.query.filter_by(general_id=user_id)]
+    education = [ed.to_dict() for ed in Education.query.filter_by(general_id=user_id)]
+    projects = [project.to_dict() for project in Project.query.filter_by(general_id=user_id)]
 
     return jsonify(skills=skills, general=general, about=about, experience=experience, education=education, projects=projects)
 

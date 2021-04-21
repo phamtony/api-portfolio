@@ -1,7 +1,10 @@
 List out features for API
 
 Authentication
-    -Model for the user
+    -Model for the user or use General
+    -Login and Registration
+
+Make accounts page
 
 Refactor
 
