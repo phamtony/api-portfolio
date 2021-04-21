@@ -8,13 +8,14 @@ class ModelFunc():
         super().__init__()
 
     def to_dict(self):
-        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns if column.name != "password"}
 
 
 class General(db.Model, ModelFunc):
     __tablename__ = "general"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
+    password = db.Column(db.String(200))
     occupation = db.Column(db.String(100))
     email = db.Column(db.String(100))
     github = db.Column(db.String(100))

@@ -37,7 +37,7 @@ def home():
     education = Education.query.filter_by(general_id=user_id)
     skills = Skills.query.filter_by(general_id=user_id).first()
     projects = Project.query.filter_by(general_id=user_id)
-    return render_template("index.html", name=general.name, general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
+    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
 
 
 @app.route("/register")
