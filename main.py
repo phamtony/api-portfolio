@@ -23,6 +23,9 @@ db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = "login"
+login_manager.login_message = "You need to log in to view the page. If you're not registered, please register first."
+
 
 with app.app_context():
     db.create_all()
@@ -34,6 +37,7 @@ def load_user(user_id):
 
 
 @app.route("/")
+@login_required
 def home():
     general = General.query.get(current_user.id)
     about = About.query.filter_by(general_id=current_user.id).first()
@@ -96,12 +100,14 @@ def login():
 
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for("login"))
 
 
 @app.route("/general", methods=["GET", "POST"])
+@login_required
 def general():
     form = GeneralForm()
     if request.method == "POST" and form.validate_on_submit():
@@ -120,6 +126,7 @@ def general():
 
 
 @app.route("/edit-general", methods=["GET", "POST"])
+@login_required
 def edit_general():
     general_info = General.query.get(current_user.id)
     edit_general = GeneralForm(
@@ -141,6 +148,7 @@ def edit_general():
 
 
 @app.route("/about", methods=["GET", "POST"])
+@login_required
 def about():
     form = AboutForm()
     if request.method == "POST" and form.validate_on_submit():
@@ -166,6 +174,7 @@ def about():
 
 
 @app.route("/edit-about", methods=["GET", "POST"])
+@login_required
 def edit_about():
     about_info = About.query.filter_by(general_id=current_user.id).first()
     image = about_info.image
@@ -193,6 +202,7 @@ def edit_about():
 
 
 @app.route("/delete-about")
+@login_required
 def delete_about():
     about_info = About.query.filter_by(general_id=current_user.id).first()
     db.session.delete(about_info)
@@ -201,6 +211,7 @@ def delete_about():
 
 
 @app.route("/experience", methods=["GET", "POST"])
+@login_required
 def add_experience():
     #Refactor later with authentication and login
     form = ExperienceForm()
@@ -221,6 +232,7 @@ def add_experience():
 
 
 @app.route('/edit-experience/<int:id>', methods=["GET", "POST"])
+@login_required
 def edit_experience(id):
     experience = Experience.query.get(id)
     edit_experience = ExperienceForm(
@@ -243,6 +255,7 @@ def edit_experience(id):
 
 
 @app.route('/delete-experience/<int:id>')
+@login_required
 def delete_experience(id):
     experience_info = Experience.query.get(id)
     db.session.delete(experience_info)
@@ -251,6 +264,7 @@ def delete_experience(id):
 
 
 @app.route("/education", methods=["GET", "POST"])
+@login_required
 def add_education():
     # Refactor later with authentication and login
     form = EducationForm()
@@ -269,6 +283,7 @@ def add_education():
 
 
 @app.route('/edit-education/<int:id>', methods=["GET", "POST"])
+@login_required
 def edit_education(id):
     education = Education.query.get(id)
     edit_education = EducationForm(
@@ -287,6 +302,7 @@ def edit_education(id):
 
 
 @app.route('/delete-education/<int:id>', methods=["GET", "POST"])
+@login_required
 def delete_education(id):
     education_info = Education.query.get(id)
     db.session.delete(education_info)
@@ -295,6 +311,7 @@ def delete_education(id):
 
 
 @app.route("/skills", methods=["GET", "POST"])
+@login_required
 def skills():
     form = SkillsForm()
     if request.method == "POST" and form.validate_on_submit():
@@ -313,6 +330,7 @@ def skills():
 
 
 @app.route("/edit-skills", methods=["GET", "POST"])
+@login_required
 def edit_skills():
     skills_info = Skills.query.filter_by(general_id=current_user.id).first()
     edit_skills = SkillsForm(
@@ -334,6 +352,7 @@ def edit_skills():
 
 
 @app.route("/delete-skills")
+@login_required
 def delete_skills():
     skills_info = Skills.query.filter_by(general_id=current_user.id).first()
     db.session.delete(skills_info)
@@ -342,6 +361,7 @@ def delete_skills():
 
 
 @app.route("/project", methods=["GET", "POST"])
+@login_required
 def add_project():
     form = ProjectForm()
     if request.method == "POST" and form.validate_on_submit():
@@ -367,6 +387,7 @@ def add_project():
 
 
 @app.route("/edit-project/<int:id>", methods=["GET", "POST"])
+@login_required
 def edit_project(id):
     project_info = Project.query.get(id)
     image = project_info.screenshot
@@ -395,6 +416,7 @@ def edit_project(id):
 
 
 @app.route("/delete-project/<int:id>")
+@login_required
 def delete_project(id):
     project_info = Project.query.get(id)
     db.session.delete(project_info)
@@ -402,15 +424,15 @@ def delete_project(id):
     return redirect(url_for("home"))
 
 
-@app.route('/json')
-def json_reveal():
-    skill_query = Skills.query.filter_by(general_id=current_user.id).first()
-    about_query = About.query.filter_by(general_id=current_user.id).first()
-    experience_query = Experience.query.filter_by(general_id=current_user.id)
-    education_query = Education.query.filter_by(general_id=current_user.id)
-    project_query = Project.query.filter_by(general_id=current_user.id)
+@app.route('/json/<int:id>')
+def json_reveal(id):
+    skill_query = Skills.query.filter_by(general_id=id).first()
+    about_query = About.query.filter_by(general_id=id).first()
+    experience_query = Experience.query.filter_by(general_id=id)
+    education_query = Education.query.filter_by(general_id=id)
+    project_query = Project.query.filter_by(general_id=id)
 
-    general = General.query.get(current_user.id).to_dict()
+    general = General.query.get(id).to_dict()
     skills = skill_query.to_dict() if skill_query else {}
     about = about_query.to_dict() if about_query else {}
     experience = [experience.to_dict() for experience in experience_query] if experience_query else {}
