@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h1>{{ title }} Info</h1>
+                <h1 style="margin-bottom: 40px;">{{ title }} Info</h1>
 
                 {% if title == "About" or title == "Project" %}
                     {% if image %}
@@ -22,7 +22,7 @@
                     {{ ckeditor.config(name='body') }}
                 {% endif %}
                 {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-                <a href="{{ url_for('home') }}"><button type="button" class="btn btn-default">Go Back</button></a>
+                <a href="{{ url_for('home') }}"><button type="button" style="margin-top: 15px;" class="btn btn-default">Go Back</button></a>
             </div>
         </div>
     </div>

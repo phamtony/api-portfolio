@@ -1,0 +1,35 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Portfolio Data{% endblock %}
+
+{% block content %}
+    {% include'/components/header.html' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 style="margin-bottom: 40px;">My Account</h1>
+
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-success">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+                <div style="margin-top: 15px;">
+                    <button id="api_button" type="button" class="btn btn-info">Generate API</button>
+                </div>
+                <a href="{{ url_for('home') }}"><button type="button" style="margin-top: 15px;" class="btn btn-default">Go Back</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    {{super()}}
+{% endblock %}

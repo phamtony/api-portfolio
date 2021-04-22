@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, LoginManager, login_required, current_user, logout_user
 
 from model import db, General, About, Experience, Education, Skills, Project
-from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm
+from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm, AccountForm
 
 UPLOAD_FOLDER = './static/images/'
 
@@ -424,8 +424,37 @@ def delete_project(id):
     return redirect(url_for("home"))
 
 
-@app.route('/json/<int:id>')
-def json_reveal(id):
+@app.route("/my-account", methods=["GET", "POST"])
+@login_required
+def my_account():
+    user_info = General.query.get(current_user.id)
+    form = AccountForm(
+        name=user_info.name,
+        email=user_info.email,
+        password=None,
+        api_key=user_info.api_key,
+    )
+    if form.validate_on_submit():
+        message = ""
+        if form.password.data:
+            user_info.password = form.password.data
+            message += "Password change has been saved."
+        user_info.name = form.name.data
+        user_info.email = form.email.data
+        user_info.api_key = form.api_key.data
+        message += " All changes saved."
+        flash(message)
+        db.session.commit()
+        return redirect(url_for("my_account"))
+    return render_template("account.html", form=form)
+
+
+
+
+@app.route('/json')
+def json_reveal():
+    api = request.args.get("api")
+    id = General.query.filter_by(api_key=api).first().id
     skill_query = Skills.query.filter_by(general_id=id).first()
     about_query = About.query.filter_by(general_id=id).first()
     experience_query = Experience.query.filter_by(general_id=id)

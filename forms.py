@@ -69,3 +69,11 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+
+class AccountForm(FlaskForm):
+    name = StringField("Name")
+    email = StringField("Email")
+    password = PasswordField("Change Password")
+    api_key = StringField("API Key")
+    submit = SubmitField("Save")
