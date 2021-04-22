@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('home') }}">Portfolio Data</a>
+    </div>
+
+      {% if title == "Register" or title == "Login" %}
+      {% else %}
+        <ul class="nav navbar-nav" style="float: right;">
+          <li><a href="#">My Account</a></li>
+          <li><a href="{{ url_for('logout') }}">Log Off</a></li>
+        </ul>
+      {% endif %}
+  </div>
+</nav>

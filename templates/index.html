@@ -3,11 +3,11 @@
 {% block title %}Portfolio Data{% endblock %}
 
 {% block content %}
+    {% include'/components/header.html' %}
+
     <div class="container" style="margin-bottom: 50px;">
         <div class="row">
             <div class="col-xs-12">
-                <h1 style="padding-bottom: 30px;">Portfolio Data</h1>
-
                 <h3>General</h3>
                 {% if general_info %}
                     {% include'/includes/general_data.html' %}
