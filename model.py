@@ -22,6 +22,7 @@ class General(db.Model, ModelFunc, UserMixin):
     email = db.Column(db.String(100))
     github = db.Column(db.String(100))
     linkedin = db.Column(db.String(100))
+    front_text = db.Column(db.String(500))
     api_key = db.Column(db.String(100))
 
     experience = relationship("Experience", back_populates="general")

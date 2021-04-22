@@ -17,7 +17,7 @@
                     {% endif %}
                 {% endif %}
 
-                {% if title == "Experience" %}
+                {% if ckEditor %}
                     {{ ckeditor.load() }}
                     {{ ckeditor.config(name='body') }}
                 {% endif %}

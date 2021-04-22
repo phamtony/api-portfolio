@@ -117,12 +117,13 @@ def general():
             email=form.email.data,
             github=form.github.data,
             linkedin=form.linkedin.data,
+            front_text=form.front_text.data,
         )
         db.session.add(new_general)
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("form_template.html", form=form, title="General")
+    return render_template("form_template.html", form=form, title="General", ckEditor=True)
 
 
 @app.route("/edit-general", methods=["GET", "POST"])
@@ -135,6 +136,7 @@ def edit_general():
         email=general_info.email,
         github=general_info.github,
         linkedin=general_info.linkedin,
+        front_text=general_info.front_text,
     )
     if edit_general.validate_on_submit():
         general_info.name = edit_general.name.data
@@ -142,9 +144,10 @@ def edit_general():
         general_info.email = edit_general.email.data
         general_info.github = edit_general.github.data
         general_info.linkedin = edit_general.linkedin.data
+        general_info.front_text = edit_general.front_text.data
         db.session.commit()
         return redirect(url_for("home"))
-    return render_template("form_template.html", form=edit_general, title="General")
+    return render_template("form_template.html", form=edit_general, title="General", ckEditor=True)
 
 
 @app.route("/about", methods=["GET", "POST"])
@@ -228,7 +231,7 @@ def add_experience():
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("form_template.html", form=form, title="Experience")
+    return render_template("form_template.html", form=form, title="Experience", ckEditor=True)
 
 
 @app.route('/edit-experience/<int:id>', methods=["GET", "POST"])
@@ -251,7 +254,7 @@ def edit_experience(id):
         db.session.commit()
         return redirect(url_for("home"))
 
-    return render_template("form_template.html", form=edit_experience, title="Experience")
+    return render_template("form_template.html", form=edit_experience, title="Experience", ckEditor=True)
 
 
 @app.route('/delete-experience/<int:id>')
@@ -437,7 +440,8 @@ def my_account():
     if form.validate_on_submit():
         message = ""
         if form.password.data:
-            user_info.password = form.password.data
+            hash_pw = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
+            user_info.password = hash_pw
             message += "Password change has been saved."
         user_info.name = form.name.data
         user_info.email = form.email.data
@@ -447,8 +451,6 @@ def my_account():
         db.session.commit()
         return redirect(url_for("my_account"))
     return render_template("account.html", form=form)
-
-
 
 
 @app.route('/json')

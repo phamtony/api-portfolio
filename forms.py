@@ -11,6 +11,7 @@ class GeneralForm(FlaskForm):
     email = StringField("Email", validators=[Email()])
     github = StringField("Github")
     linkedin = StringField("Linkedin")
+    front_text = CKEditorField("Hero Text")
     submit = SubmitField("Submit")
 
 
