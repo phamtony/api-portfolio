@@ -9,8 +9,6 @@ from model import General, About, Experience, Education, Skills, Project
 from form import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm, AccountForm
 
 app = create_app()
-login_manager.login_view = "login"
-login_manager.login_message = "You need to log in to view the page. If you're not registered, please register first."
 
 
 @login_manager.user_loader
