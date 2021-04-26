@@ -1,32 +1,16 @@
-from flask import Flask, render_template, jsonify, redirect, url_for, flash, request, abort
-import os
+from flask import render_template, jsonify, redirect, url_for, flash, request
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 
-from extensions import db, login_manager, ckeditor, bootstrap
+from __init__ import create_app
+from extensions import db, login_manager
 from model import General, About, Experience, Education, Skills, Project
 from form import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm, AccountForm
 
-app = Flask(__name__)
-
-UPLOAD_FOLDER = './static/images/'
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///portfolio.db")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.init_app(app)
-login_manager.init_app(app)
-ckeditor.init_app(app)
-bootstrap.init_app(app)
-
+app = create_app()
 login_manager.login_view = "login"
 login_manager.login_message = "You need to log in to view the page. If you're not registered, please register first."
-
-
-with app.app_context():
-    db.create_all()
 
 
 @login_manager.user_loader
