@@ -6,8 +6,8 @@ from flask_login import login_user, login_required, current_user, logout_user
 
 from __init__ import create_app
 from extensions import db, login_manager
-from model import General, About, Experience, Education, Skills, Project
-from form import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm, AccountForm
+from models import General, About, Experience, Education, Skills, Project
+from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm, AccountForm
 
 app = create_app()
 
