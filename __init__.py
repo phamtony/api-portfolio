@@ -1,5 +1,7 @@
 from flask import Flask
 
+from api.api import json_return
+
 def create_app():
     app = Flask(__name__)
 
@@ -9,6 +11,8 @@ def create_app():
         app.config.from_object("config.TestingConfig")
     else:
         app.config.from_object("config.DevelopmentConfig")
+
+    app.register_blueprint(json_return)
 
     from extensions import db, login_manager, ckeditor, bootstrap
 
