@@ -4,6 +4,7 @@ from api.api import json_return
 from index.index import main_page
 from register_login.register_login import register_login_page
 from account.account import account_page
+from general.general import general_page
 
 from models import General
 
@@ -22,6 +23,7 @@ def create_app():
     app.register_blueprint(main_page)
     app.register_blueprint(account_page)
     app.register_blueprint(register_login_page)
+    app.register_blueprint(general_page)
 
     from extensions import db, login_manager, ckeditor, bootstrap
 
