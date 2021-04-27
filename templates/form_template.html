@@ -22,7 +22,7 @@
                     {{ ckeditor.config(name='body') }}
                 {% endif %}
                 {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-                <a href="{{ url_for('home') }}"><button type="button" style="margin-top: 15px;" class="btn btn-default">Go Back</button></a>
+                <a href="{{ url_for('main_page.home') }}"><button type="button" style="margin-top: 15px;" class="btn btn-default">Go Back</button></a>
             </div>
         </div>
     </div>

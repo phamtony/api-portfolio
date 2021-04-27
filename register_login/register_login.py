@@ -32,7 +32,7 @@ def register():
 
         login_user(new_user)
 
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("login_register.html", title="Register", form=form)
 
@@ -40,7 +40,7 @@ def register():
 @register_login_page.route('/login', methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
     form = LoginForm()
     if request.method == "POST" and form.validate_on_submit():
         email = form.email.data
@@ -53,7 +53,7 @@ def login():
 
         if check_password_hash(user.password, password):
             login_user(user)
-            return redirect(url_for("home"))
+            return redirect(url_for("main_page.home"))
         else:
             flash("Password incorrect, please try again.")
             return redirect(url_for("register_login_page.login"))

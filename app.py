@@ -9,16 +9,7 @@ from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsF
 
 app = create_app()
 
-@app.route("/")
-@login_required
-def home():
-    general = General.query.get(current_user.id)
-    about = About.query.filter_by(general_id=current_user.id).first()
-    experiences = Experience.query.filter_by(general_id=current_user.id)
-    education = Education.query.filter_by(general_id=current_user.id)
-    skills = Skills.query.filter_by(general_id=current_user.id).first()
-    projects = Project.query.filter_by(general_id=current_user.id)
-    return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
+
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -36,7 +27,7 @@ def general():
         )
         db.session.add(new_general)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=form, title="General", ckEditor=True)
 
@@ -61,7 +52,7 @@ def edit_general():
         general_info.linkedin = edit_general.linkedin.data
         general_info.front_text = edit_general.front_text.data
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
     return render_template("form_template.html", form=edit_general, title="General", ckEditor=True)
 
 
@@ -86,7 +77,7 @@ def about():
         )
         db.session.add(new_about)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=form, title="About")
 
@@ -115,7 +106,7 @@ def edit_about():
         about_info.section_two = edit_about.section_two.data
         about_info.skills_goto = edit_about.skills_goto.data
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
     return render_template("form_template.html", form=edit_about, image=image, title="About")
 
 
@@ -125,7 +116,7 @@ def delete_about():
     about_info = About.query.filter_by(general_id=current_user.id).first()
     db.session.delete(about_info)
     db.session.commit()
-    return redirect((url_for("home")))
+    return redirect((url_for("main_page.home")))
 
 
 @app.route("/experience", methods=["GET", "POST"])
@@ -144,7 +135,7 @@ def add_experience():
         )
         db.session.add(new_experience)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=form, title="Experience", ckEditor=True)
 
@@ -167,7 +158,7 @@ def edit_experience(id):
         experience.link = edit_experience.link.data
         experience.description = edit_experience.description.data
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=edit_experience, title="Experience", ckEditor=True)
 
@@ -178,7 +169,7 @@ def delete_experience(id):
     experience_info = Experience.query.get(id)
     db.session.delete(experience_info)
     db.session.commit()
-    return redirect(url_for("home"))
+    return redirect(url_for("main_page.home"))
 
 
 @app.route("/education", methods=["GET", "POST"])
@@ -195,7 +186,7 @@ def add_education():
         )
         db.session.add(new_education)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=form, title="Education")
 
@@ -214,7 +205,7 @@ def edit_education(id):
         education.time = edit_education.time.data
         education.degree = edit_education.degree.data
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=edit_education, title="Education")
 
@@ -225,7 +216,7 @@ def delete_education(id):
     education_info = Education.query.get(id)
     db.session.delete(education_info)
     db.session.commit()
-    return redirect(url_for("home"))
+    return redirect(url_for("main_page.home"))
 
 
 @app.route("/skills", methods=["GET", "POST"])
@@ -242,7 +233,7 @@ def skills():
         )
         db.session.add(new_skills)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=form, title="Skills")
 
@@ -264,7 +255,7 @@ def edit_skills():
         skills_info.database = edit_skills.database.data
         skills_info.misc = edit_skills.misc.data
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=edit_skills, title="Skills")
 
@@ -275,7 +266,7 @@ def delete_skills():
     skills_info = Skills.query.filter_by(general_id=current_user.id).first()
     db.session.delete(skills_info)
     db.session.commit()
-    return redirect(url_for("home"))
+    return redirect(url_for("main_page.home"))
 
 
 @app.route("/project", methods=["GET", "POST"])
@@ -299,7 +290,7 @@ def add_project():
         )
         db.session.add(new_project)
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=form, title="Project")
 
@@ -328,7 +319,7 @@ def edit_project(id):
         project_info.description = edit_project.description.data
         project_info.tech_list = edit_project.tech_list.data
         db.session.commit()
-        return redirect(url_for("home"))
+        return redirect(url_for("main_page.home"))
 
     return render_template("form_template.html", form=edit_project, title="Project", image=image)
 
@@ -339,7 +330,7 @@ def delete_project(id):
     project_info = Project.query.get(id)
     db.session.delete(project_info)
     db.session.commit()
-    return redirect(url_for("home"))
+    return redirect(url_for("main_page.home"))
 
 
 if __name__ == "__main__":

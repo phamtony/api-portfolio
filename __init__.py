@@ -1,8 +1,10 @@
 from flask import Flask
 
+from api.api import json_return
+from index.index import main_page
 from register_login.register_login import register_login_page
 from account.account import account_page
-from api.api import json_return
+
 from models import General
 
 
@@ -17,6 +19,7 @@ def create_app():
         app.config.from_object("config.DevelopmentConfig")
 
     app.register_blueprint(json_return)
+    app.register_blueprint(main_page)
     app.register_blueprint(account_page)
     app.register_blueprint(register_login_page)
 

@@ -10,32 +10,32 @@
             <div class="col-xs-12">
                 <h3>General</h3>
                 {% if general_info %}
-                    {% include'/includes/general_data.html' %}
+                    {% include'/includes/_general_data.html' %}
 
                     <hr>
 
                     <h3 style="margin-top: 50px;">About</h3>
-                    {% include'/includes/about_data.html' %}
+                    {% include'/includes/_about_data.html' %}
 
                     <hr>
 
                     <h3 style="margin-top: 50px;">Experience</h3>
-                    {% include'/includes/experience_data.html' %}
+                    {% include'/includes/_experience_data.html' %}
 
                     <hr>
 
                     <h3 style="margin-top: 50px;">Education</h3>
-                    {% include'/includes/education_data.html' %}
+                    {% include'/includes/_education_data.html' %}
 
                     <hr>
 
                     <h3 style="margin-top: 50px;">Skills</h3>
-                    {% include'/includes/skills_data.html' %}
+                    {% include'/includes/_skills_data.html' %}
 
                     <hr>
 
                     <h3 style="margin-top: 50px;">Projects</h3>
-                    {% include'/includes/project_data.html' %}
+                    {% include'/includes/_project_data.html' %}
                 {% else %}
                     <a href="{{ url_for('general') }}"><button type="button" class="btn btn-primary">Add General Info</button></a>
                 {% endif %}
