@@ -1,21 +1,13 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, request
+from flask_login import login_required, current_user
 import os
 
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, current_user, logout_user
-
 from __init__ import create_app
-from extensions import db, login_manager
+from extensions import db
 from models import General, About, Experience, Education, Skills, Project
 from forms import GeneralForm, AboutForm, ExperienceForm, EducationForm, SkillsForm, ProjectForm, RegisterForm, LoginForm, AccountForm
 
 app = create_app()
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return General.query.get(int(user_id))
-
 
 @app.route("/")
 @login_required
@@ -27,64 +19,6 @@ def home():
     skills = Skills.query.filter_by(general_id=current_user.id).first()
     projects = Project.query.filter_by(general_id=current_user.id)
     return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)
-
-
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    form = RegisterForm()
-    if request.method == "POST" and form.validate_on_submit():
-        email = form.email.data
-        user = General.query.filter_by(email=email).first()
-        if user:
-            flash("This user already exist. Log in instead!")
-            return redirect(url_for("login"))
-
-        hash_pw = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
-
-        new_user = General(
-            name=form.name.data,
-            password=hash_pw,
-            email=form.email.data,
-        )
-        db.session.add(new_user)
-        db.session.commit()
-
-        login_user(new_user)
-
-        return redirect(url_for("home"))
-
-    return render_template("login_register.html", title="Register", form=form)
-
-
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for("home"))
-    form = LoginForm()
-    if request.method == "POST" and form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        user = General.query.filter_by(email=email).first()
-
-        if not user:
-            flash("Email does not exist. Please try again or register.")
-            return redirect(url_for("login"))
-
-        if check_password_hash(user.password, password):
-            login_user(user)
-            return redirect(url_for("home"))
-        else:
-            flash("Password incorrect, please try again.")
-            return redirect(url_for("login"))
-
-    return render_template("login_register.html", title="Login", form=form)
-
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("login"))
 
 
 @app.route("/general", methods=["GET", "POST"])
@@ -406,32 +340,6 @@ def delete_project(id):
     db.session.delete(project_info)
     db.session.commit()
     return redirect(url_for("home"))
-
-
-@app.route("/my-account", methods=["GET", "POST"])
-@login_required
-def my_account():
-    user_info = General.query.get(current_user.id)
-    form = AccountForm(
-        name=user_info.name,
-        email=user_info.email,
-        password=None,
-        api_key=user_info.api_key,
-    )
-    if form.validate_on_submit():
-        message = ""
-        if form.password.data:
-            hash_pw = generate_password_hash(form.password.data, method="pbkdf2:sha256", salt_length=8)
-            user_info.password = hash_pw
-            message += "Password change has been saved."
-        user_info.name = form.name.data
-        user_info.email = form.email.data
-        user_info.api_key = form.api_key.data
-        message += " All changes saved."
-        flash(message)
-        db.session.commit()
-        return redirect(url_for("my_account"))
-    return render_template("account.html", form=form)
 
 
 if __name__ == "__main__":

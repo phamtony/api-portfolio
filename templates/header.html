@@ -7,8 +7,8 @@
       {% if title == "Register" or title == "Login" %}
       {% else %}
         <ul class="nav navbar-nav" style="float: right;">
-          <li><a href="{{ url_for('my_account') }}">My Account</a></li>
-          <li><a href="{{ url_for('logout') }}">Log Off</a></li>
+          <li><a href="{{ url_for('account.my_account') }}">My Account</a></li>
+          <li><a href="{{ url_for('register_login_page.logout') }}">Log Off</a></li>
         </ul>
       {% endif %}
   </div>
