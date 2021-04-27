@@ -23,8 +23,8 @@
         </tbody>
     </table>
 
-    <a href="{{ url_for('edit_about') }}"><button type="button" class="btn btn-light">Edit About Info</button></a>
-    <a href="{{ url_for('delete_about') }}"><button type="button" class="btn btn-danger">Delete About Info</button></a>
+    <a href="{{ url_for('about_page.edit_about') }}"><button type="button" class="btn btn-light">Edit About Info</button></a>
+    <a href="{{ url_for('about_page.delete_about') }}"><button type="button" class="btn btn-danger">Delete About Info</button></a>
 {% else %}
-    <a href="{{ url_for('about') }}"><button type="button" class="btn btn-primary">Add About Info</button></a>
+    <a href="{{ url_for('about_page.about') }}"><button type="button" class="btn btn-primary">Add About Info</button></a>
 {% endif %}

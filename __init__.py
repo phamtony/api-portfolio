@@ -5,6 +5,11 @@ from index.index import main_page
 from register_login.register_login import register_login_page
 from account.account import account_page
 from general.general import general_page
+from about.about import about_page
+from experience.experience import experience_page
+from education.education import education_page
+from skills.skills import skills_page
+from project.project import project_page
 
 from models import General
 
@@ -24,6 +29,11 @@ def create_app():
     app.register_blueprint(account_page)
     app.register_blueprint(register_login_page)
     app.register_blueprint(general_page)
+    app.register_blueprint(about_page)
+    app.register_blueprint(experience_page)
+    app.register_blueprint(education_page)
+    app.register_blueprint(skills_page)
+    app.register_blueprint(project_page)
 
     from extensions import db, login_manager, ckeditor, bootstrap
 

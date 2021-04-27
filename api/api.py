@@ -2,7 +2,9 @@ from flask import Blueprint, jsonify, request
 
 from models import General, About, Experience, Education, Skills, Project
 
+
 json_return = Blueprint("json_return", __name__)
+
 
 @json_return.route('/json')
 def api():
@@ -22,4 +24,3 @@ def api():
     projects = [project.to_dict() for project in project_query] if project_query else {}
 
     return jsonify(skills=skills, general=general, about=about, experience=experience, education=education, projects=projects)
-
