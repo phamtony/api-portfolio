@@ -1,68 +1,42 @@
-List out features for API
+Backlog:
+    -Splash Page
+    -More Categories
+    -Custom sections and categories
+    -More versatile for all users
+
 
 Authentication
     -Model for the user or use General
     -Login and Registration
 
-Make accounts page
-
--Forms for each part of the portfolio
+Forms for each part of the portfolio
     -General Info
-        -Name
-        -Occupation
-        -Email
-        -Github
-        -Linkedin
     -Intro
-        -Text
     -About Me
-        -Image
-        -Intro 1st section
-        -List of skills from work
-        -2nd pg (optional)
-        -List of skills (optional)
     -Experience
-        -Company Name
-        -Job Position
-        -Time
-        -Company link
-        -Intro 1st section
-        -List
-        -2nd section (optional)
-        -2nd List
     -Skills
-        -Language
-        -Framework/Library
-        -Database
-        -Misc
     -Education
-        -School
-        -Time
-        -Degree
     -Project
-        -Project Name
-        -Project Link (If it's live)
-        -Github link
-        -Screenshot
-        -Description
-        -List of tech
--GET (Providing service of everything above.)
--POST, PUT, DELETE
 
 Model
--SQLite + SQLAlchemy
--Change database to postgresql when deployed
--Model App
+    -SQLite + SQLAlchemy
+    -Change database to postgresql when deployed
+    -Model App
+    -GET (Providing service of everything above.)
+    -POST, PUT, DELETE
 
-Template
--Have one template that shows all the info I inputted. It'll be a test of what and how it can be displayed on the front-end.
+Pages
+    -Dashboard (All info displayed)
+    -Account Page
+    -Login
+    -Register
+    -Forms page
 
 Set-up classes
--Form Generation
--Models
--Routes (main.py)
+    -Forms
+    -Models
 
-Setup file structure
+Blueprint APP
 
 Get required plugins, requirement.txt
 gunicorn==20.1.0 #Deployment with heroku
