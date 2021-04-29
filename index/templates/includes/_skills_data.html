@@ -19,8 +19,13 @@
         </tbody>
     </table>
 
-    <a href="{{ url_for('skills_page.edit_skills') }}"><button type="button" class="btn btn-light">Edit Skills Info</button></a>
-    <a href="{{ url_for('skills_page.delete_skills') }}"><button type="button" class="btn btn-danger">Delete Skills Info</button></a>
+    <div class="table-btn">
+        <a class="blue-grey darken-1 waves-effect waves-light btn" href="{{ url_for('skills_page.edit_skills') }}"><i class="material-icons left">edit</i>Edit Skills Info</a>
+        <a class="btn-delete red lighten-2 btn" href="{{ url_for('skills_page.delete_skills') }}"><i class="material-icons left">delete_forever</i>Delete Skills Info</a>
+    </div>
+
 {% else %}
-    <a href="{{ url_for('skills_page.skills') }}"><button type="button" class="btn btn-primary">Add Skills Info</button></a>
+    <div class="table-btn">
+        <a class="waves-effect waves-light btn btn-large" href="{{ url_for('skills_page.skills') }}"><i class="material-icons left">download_done</i>Add Skills Info</a>
+    </div>
 {% endif %}

@@ -37,13 +37,13 @@
 {% block scripts %}
     {{ super() }}
     <script>
-        var delete_btns = document.querySelectorAll('.btn-danger');
+        var delete_btns = document.querySelectorAll('.btn-delete');
 
         for (var btn of delete_btns) {
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (window.confirm('Delete Info?')) {
-                    window.location = e.target.parentElement.href;
+                    window.location = e.target.href;
                 }
             });
         }

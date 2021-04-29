@@ -1,4 +1,22 @@
-table img,
+h2, h3 {
+    border-bottom: 1px solid black;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+h2 {
+    margin-bottom: 30px;
+}
+table img {
+    max-width: 100px;
+    width: 100%;
+}
 .edit-form-img {
     max-width: 300px;
+    width: 100%;
+}
+table {
+    margin: 20px 0;
+}
+.table-btn {
+    margin: 0 0 75px 0;
 }
