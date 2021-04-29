@@ -26,7 +26,7 @@ def add_experience():
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=form, title="Experience", ckEditor=True)
+    return render_template("form_page.html", form=form, title="Experience", ckEditor=True)
 
 
 @experience_page.route('/edit-experience/<int:id>', methods=["GET", "POST"])
@@ -49,7 +49,7 @@ def edit_experience(id):
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=edit_experience, title="Experience", ckEditor=True)
+    return render_template("form_page.html", form=edit_experience, title="Experience", ckEditor=True)
 
 
 @experience_page.route('/delete-experience/<int:id>')

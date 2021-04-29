@@ -24,7 +24,7 @@ def add_education():
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=form, title="Education")
+    return render_template("form_page.html", form=form, title="Education")
 
 
 @education_page.route('/edit-education/<int:id>', methods=["GET", "POST"])
@@ -43,7 +43,7 @@ def edit_education(id):
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=edit_education, title="Education")
+    return render_template("form_page.html", form=edit_education, title="Education")
 
 
 @education_page.route('/delete-education/<int:id>', methods=["GET", "POST"])

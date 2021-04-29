@@ -33,7 +33,7 @@ def add_project():
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=form, title="Project")
+    return render_template("form_page.html", form=form, title="Project")
 
 
 @project_page.route("/edit-project/<int:id>", methods=["GET", "POST"])
@@ -62,7 +62,7 @@ def edit_project(id):
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=edit_project, title="Project", image=image)
+    return render_template("form_page.html", form=edit_project, title="Project", image=image)
 
 
 @project_page.route("/delete-project/<int:id>")

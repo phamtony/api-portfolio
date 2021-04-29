@@ -25,7 +25,7 @@ def skills():
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=form, title="Skills")
+    return render_template("form_page.html", form=form, title="Skills")
 
 
 @skills_page.route("/edit-skills", methods=["GET", "POST"])
@@ -47,7 +47,7 @@ def edit_skills():
         db.session.commit()
         return redirect(url_for("main_page.home"))
 
-    return render_template("form_template.html", form=edit_skills, title="Skills")
+    return render_template("form_page.html", form=edit_skills, title="Skills")
 
 
 @skills_page.route("/delete-skills")
