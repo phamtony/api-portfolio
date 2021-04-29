@@ -25,7 +25,7 @@
                     {% endfor %}
 
                     <div class="form__button-container">
-                        <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit">
+                        <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit" value="Submit">
                         {% if title == "Register" %}
                             <a class="waves-effect waves-light btn" href="{{ url_for('register_login_page.login') }}">Log in instead</a>
                         {% else %}

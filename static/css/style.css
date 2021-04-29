@@ -32,4 +32,10 @@ table {
 .text-warning {
     color: #b71c1c;
     font-size: 12px;
+    padding-bottom: 10px;
+}
+.text-success {
+    color: #81c784;
+    font-size: 12px;
+    padding-bottom: 10px;
 }

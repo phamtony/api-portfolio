@@ -75,4 +75,3 @@ class AccountForm(FlaskForm):
     email = StringField("Email")
     password = PasswordField("Change Password")
     api_key = StringField("API Key")
-    submit = SubmitField("Save")
