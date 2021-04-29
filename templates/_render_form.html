@@ -1,0 +1,15 @@
+{% macro render_field(field) %}
+    {% if field.name == 'csrf_token' %}
+    {% else %}
+        <div class="input-field">
+            {{ field.label }}
+            {{ field(**kwargs)|safe }}
+
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}

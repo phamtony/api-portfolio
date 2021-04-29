@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "_render_form.html" import render_field %}
 
 {% block title %}Portfolio Data - {{ title }}{% endblock %}
 
@@ -17,15 +17,23 @@
                     {% endif %}
                 {% endwith %}
 
-                {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+                <form action="{{ url_for(request.endpoint) }}" method="POST">
+                    {{ form.csrf_token }}
 
-                <div>
-                    {% if title == "Register" %}
-                        <a href="{{ url_for('register_login_page.login') }}"><button type="button" class="btn btn-light">Login</button></a>
-                    {% else %}
-                        <a href="{{ url_for('register_login_page.register') }}"><button type="button" class="btn btn-light">Register</button></a>
-                    {% endif %}
-                </div>
+                    {% for field in form %}
+                        {{ render_field(field) }}
+                    {% endfor %}
+
+                    <div class="form__button-container">
+                        <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit">
+                        {% if title == "Register" %}
+                            <a class="waves-effect waves-light btn" href="{{ url_for('register_login_page.login') }}">Log in instead</a>
+                        {% else %}
+                            <a class="waves-effect waves-light btn" href="{{ url_for('register_login_page.register') }}">Register</a>
+                        {% endif %}
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
