@@ -1,5 +1,5 @@
 {% if about_info %}
-    <table class="table">
+    <table class="responsive-table">
         <thead>
         <tr>
             <th>Intro</th>
@@ -14,7 +14,7 @@
         <tbody>
         <tr>
             <td>{{ about_info.intro }}</td>
-            <td><img style="max-width: 60px;" src="/static/images/{{ about_info.image }}" alt=""></td>
+            <td><img src="/static/images/{{ about_info.image }}" alt=""></td>
             <td>{{ about_info.section_one }}</td>
             <td>{{ about_info.skills_work }}</td>
             <td>{{ about_info.section_two }}</td>

@@ -1,15 +1,13 @@
-{% extends 'bootstrap/base.html' %}
+{% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Portfolio Data{% endblock %}
+{% block title %}Portfolio Data - Account{% endblock %}
 
 {% block content %}
-    {% include'header.html' %}
-
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <h1 style="margin-bottom: 40px;">My Account</h1>
+            <div class="col s12 m10 offset-m1">
+                <h1>My Account</h1>
 
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -20,16 +18,32 @@
                 {% endwith %}
 
                 {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-                <div style="margin-top: 15px;">
+                <div>
                     <button id="api_button" type="button" class="btn btn-info">Generate API</button>
                 </div>
-                <a href="{{ url_for('main_page.home') }}"><button type="button" style="margin-top: 15px;" class="btn btn-default">Go Back</button></a>
+                <a href="{{ url_for('main_page.home') }}"><button type="button" class="btn btn-default">Go Back</button></a>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{url_for('static', filename='js/main.js')}}"></script>
-    {{super()}}
+    {{ super() }}
+    <script>
+        function generateAPI(length) {
+        var result           = [];
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+              result.push(characters.charAt(Math.floor(Math.random() *
+         charactersLength)));
+           }
+           return result.join('');
+        }
+
+        document.getElementById('api_button').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('api_key').value = generateAPI(24)
+        });
+    </script>
 {% endblock %}

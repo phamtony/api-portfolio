@@ -1,5 +1,5 @@
 {% if education_list %}
-     <table class="table">
+     <table class="responsive-table">
     <thead>
     <tr>
         <th>School Name</th>
@@ -31,4 +31,4 @@
     </table>
 {% endif %}
 
-<a href="{{ url_for('education_page.add_education') }}"><button type="button" class="btn btn-primary">Add Education</button></a>
+<a class="btn" href="{{ url_for('education_page.add_education') }}">Add Education</a>
