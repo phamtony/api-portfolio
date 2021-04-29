@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "_render_form.html" import render_field %}
+
+{#{% import "bootstrap/wtf.html" as wtf %}#}
+{#                {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}#}
 
 {% block title %}Portfolio Data - {{ title }}{% endblock %}
 
@@ -12,7 +15,7 @@
                 {% if title == "About" or title == "Project" %}
                     {% if image %}
                         <p>Current Uploaded Image:</p>
-                        <div>
+                        <div style="padding-bottom: 20px;">
                             <img class="materialboxed edit-form-img" src="/static/images/{{ image }}" alt="">
                         </div>
                     {% endif %}
@@ -23,8 +26,19 @@
                     {{ ckeditor.config(name='body') }}
                 {% endif %}
 
-                {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-                <a href="{{ url_for('main_page.home') }}"><button type="button" class="btn btn-default">Go Back</button></a>
+                <form action method="POST" enctype="multipart/form-data">
+                    {{ form.csrf_token }}
+
+                    {% for field in form %}
+                        {{ render_field(field) }}
+                    {% endfor %}
+
+                    <div class="form__button-container">
+                        <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit" value="Submit">
+                        <a class="waves-effect waves-light btn grey darken-1" href="{{ url_for('main_page.home') }}">Go Back</a>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

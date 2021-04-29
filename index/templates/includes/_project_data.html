@@ -21,7 +21,7 @@
             <td><img class="materialboxed" src="/static/images/{{ project.screenshot }}" alt=""></td>
             <td>{{ project.description }}</td>
             <td>{{ project.tech_list }}</td>
-        <td>
+        <td class="button__container">
             <a class="blue-grey darken-1 btn btn-small waves-effect waves-light" href="{{ url_for('project_page.edit_project', id=project.id) }}">Edit</a>
             <a class="btn-delete red lighten-2 btn btn-small waves-effect waves-light" href="{{ url_for('project_page.delete_project', id=project.id) }}">Delete</a>
         </td>

@@ -17,6 +17,19 @@ table img {
 }
 table {
     margin: 20px 0;
+    width: 100%;
+    word-wrap: break-word;
+    table-layout: fixed;
+}
+table td {
+    table-layout:fixed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+table td.button__container {
+    table-layout: initial;
+    overflow: initial;
 }
 .table-btn {
     margin: 0 0 75px 0;

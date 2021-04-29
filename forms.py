@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, FileField
+from wtforms import StringField, PasswordField, FileField, TextAreaField
 from wtforms.validators import DataRequired, URL, Email
 from flask_ckeditor import CKEditorField
 import email_validator
@@ -11,18 +11,16 @@ class GeneralForm(FlaskForm):
     email = StringField("Email", validators=[Email()])
     github = StringField("Github")
     linkedin = StringField("Linkedin")
-    front_text = CKEditorField("Hero Text")
-    submit = SubmitField("Submit")
+    front_text = CKEditorField("")
 
 
 class AboutForm(FlaskForm):
-    intro = CKEditorField("Intro")
-    image = FileField()
-    section_one = CKEditorField("Section One")
+    intro = TextAreaField("Intro", render_kw={"class": "materialize-textarea"})
+    image = FileField("")
+    section_one = TextAreaField("Section One", render_kw={"class": "materialize-textarea"})
     skills_work = StringField("List skills, use ',' to separate.")
-    section_two = CKEditorField("Section Two")
+    section_two = TextAreaField("Section Two", render_kw={"class": "materialize-textarea"})
     skills_goto = StringField("List skills, use ',' to separate.")
-    submit = SubmitField("Submit")
 
 
 class ExperienceForm(FlaskForm):
@@ -30,15 +28,13 @@ class ExperienceForm(FlaskForm):
     position = StringField("Position")
     time = StringField("How long were you here for? eg. Apr. 2015 - Present")
     link = StringField("Company Link")
-    description = CKEditorField("Job Description")
-    submit = SubmitField("Submit")
+    description = CKEditorField("")
 
 
 class EducationForm(FlaskForm):
     school = StringField("School Name")
     time = StringField("Duration")
     degree = StringField("Degree")
-    submit = SubmitField("Submit")
 
 
 class SkillsForm(FlaskForm):
@@ -46,7 +42,6 @@ class SkillsForm(FlaskForm):
     framework_library = StringField("Framework/Library")
     database = StringField("Database")
     misc = StringField("Misc")
-    submit = SubmitField("Submit")
 
 
 class ProjectForm(FlaskForm):
@@ -56,7 +51,6 @@ class ProjectForm(FlaskForm):
     screenshot = FileField()
     description = StringField("Project Description")
     tech_list = StringField("List Of Tech")
-    submit = SubmitField("Submit")
 
 
 class RegisterForm(FlaskForm):

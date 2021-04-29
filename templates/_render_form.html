@@ -1,5 +1,16 @@
 {% macro render_field(field) %}
     {% if field.name == 'csrf_token' %}
+    {% elif field.name == 'image' or field.name == 'screenshot' %}
+        <div class="file-field input-field">
+          <div class="btn">
+             <span>Browse</span>
+             {{ field(**kwargs)|safe }}
+          </div>
+
+          <div class="file-path-wrapper">
+             <input class="file-path validate" type="text" placeholder="Upload file" />
+          </div>
+        </div>
     {% else %}
         <div class="input-field">
             {{ field.label }}
