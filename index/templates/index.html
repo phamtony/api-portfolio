@@ -6,23 +6,23 @@
     <div class="container">
         <div class="row">
             <div class="col s12">
-                <h3>General</h3>
+                <h3 id="General">General</h3>
                 {% if general_info %}
                     {% include'/includes/_general_data.html' %}
 
-                    <h3>About</h3>
+                    <h3 id="About">About</h3>
                     {% include'/includes/_about_data.html' %}
 
-                    <h3>Experience</h3>
+                    <h3 id="Experience">Experience</h3>
                     {% include'/includes/_experience_data.html' %}
 
-                    <h3>Education</h3>
+                    <h3 id="Education">Education</h3>
                     {% include'/includes/_education_data.html' %}
 
-                    <h3>Skills</h3>
+                    <h3 id="Skills">Skills</h3>
                     {% include'/includes/_skills_data.html' %}
 
-                    <h3>Projects</h3>
+                    <h3 id="Project">Projects</h3>
                     {% include'/includes/_project_data.html' %}
                 {% else %}
                     <a href="{{ url_for('general_page.general') }}"><button type="button" class="btn btn-primary">Add General Info</button></a>

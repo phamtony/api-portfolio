@@ -35,12 +35,11 @@ def create_app():
     app.register_blueprint(skills_page)
     app.register_blueprint(project_page)
 
-    from extensions import db, login_manager, ckeditor, bootstrap
+    from extensions import db, login_manager, ckeditor
 
     db.init_app(app)
     login_manager.init_app(app)
     ckeditor.init_app(app)
-    bootstrap.init_app(app)
 
     @login_manager.user_loader
     def load_user(user_id):
