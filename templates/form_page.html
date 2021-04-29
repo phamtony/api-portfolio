@@ -13,7 +13,7 @@
                     {% if image %}
                         <p>Current Uploaded Image:</p>
                         <div>
-                            <img class="edit-form-img" src="/static/images/{{ image }}" alt="">
+                            <img class="materialboxed edit-form-img" src="/static/images/{{ image }}" alt="">
                         </div>
                     {% endif %}
                 {% endif %}
@@ -35,4 +35,14 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.materialboxed');
+            var instances = M.Materialbox.init(elems);
+        });
+    </script>
 {% endblock %}
