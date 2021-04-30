@@ -24,11 +24,11 @@
     </table>
 
     <div class="table-btn">
-        <a class="blue-grey darken-1 waves-effect waves-light btn" href="{{ url_for('about_page.edit_about') }}"><i class="material-icons left">edit</i>Edit About Info</a>
-        <a class="btn-delete red lighten-2 btn waves-effect waves-light" href="{{ url_for('about_page.delete_about') }}"><i class="material-icons left">delete_forever</i>Delete About Info</a>
+        <a class="btn waves-effect waves-light" href="{{ url_for('about_page.edit_about') }}"><i class="material-icons left">edit</i>Edit About Info</a>
+        <a class="btn-delete grey lighten-3 black-text btn waves-effect waves-light" href="{{ url_for('about_page.delete_about') }}"><i class="material-icons left">delete_forever</i>Delete About Info</a>
     </div>
 {% else %}
     <div class="table-btn">
-        <a class="waves-effect waves-light btn btn-large" href="{{ url_for('about_page.about') }}"><i class="material-icons left">person</i>Add About Info</a>
+        <a class="btn waves-effect waves-light" href="{{ url_for('about_page.about') }}"><i class="material-icons left">person</i>Add About Info</a>
     </div>
 {% endif %}

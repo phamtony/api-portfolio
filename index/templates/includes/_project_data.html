@@ -22,8 +22,8 @@
             <td>{{ project.description }}</td>
             <td>{{ project.tech_list }}</td>
         <td class="button__container">
-            <a class="blue-grey darken-1 btn btn-small waves-effect waves-light" href="{{ url_for('project_page.edit_project', id=project.id) }}">Edit</a>
-            <a class="btn-delete red lighten-2 btn btn-small waves-effect waves-light" href="{{ url_for('project_page.delete_project', id=project.id) }}">Delete</a>
+            <a class="btn btn-small waves-effect waves-light" href="{{ url_for('project_page.edit_project', id=project.id) }}">Edit</a>
+            <a class="btn-delete grey lighten-3 black-text btn btn-small waves-effect waves-light" href="{{ url_for('project_page.delete_project', id=project.id) }}">Delete</a>
         </td>
         </tr>
     {% endfor %}
@@ -32,5 +32,5 @@
 {% endif %}
 
 <div class="table-btn">
-    <a class="waves-effect waves-light btn btn-large" href="{{ url_for('project_page.add_project') }}"><i class="material-icons left">view_compact</i>Add Project</a>
+    <a class="btn waves-effect waves-light" href="{{ url_for('project_page.add_project') }}"><i class="material-icons left">view_compact</i>Add Project</a>
 </div>

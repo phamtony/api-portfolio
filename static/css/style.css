@@ -4,17 +4,23 @@
 :root {
     --white: #fff;
     --black: #000;
-    --red: #b71c1c;
-    --green: #81c784;
-    --light-grey: #f8f8f8;
+    --main-light-red: #e57373;
+    --main-teal: #26a69a;
+    --red: #c62828;
+    --green: #2e7d32;
+    --light-grey: #eeeeee;
+    --white-grey: #f8f8f8;
     --opensans: 'Open Sans', sans-serif;
     --poppins: 'Poppins', sans-serif;
     --easing: cubic-bezier(0.645,0.045,0.355,1);
     --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
 }
+
+.black-text {color: var(--black);}
+
 body {
     font-family: var(--opensans);
-    background-color: var(--light-grey);
+    background-color: var(--white-grey);
     font-weight: 300;
 }
 

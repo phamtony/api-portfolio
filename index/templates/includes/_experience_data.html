@@ -31,8 +31,8 @@
             </td>
 
         <td class="button__container">
-            <a class="blue-grey darken-1 btn btn-small waves-effect waves-light" href="{{ url_for('experience_page.edit_experience', id=experience.id) }}">Edit</a>
-            <a class="btn-delete red lighten-2 btn btn-small waves-effect waves-light" href="{{ url_for('experience_page.delete_experience', id=experience.id) }}">Delete</a>
+            <a class="btn btn-small waves-effect waves-light" href="{{ url_for('experience_page.edit_experience', id=experience.id) }}">Edit</a>
+            <a class="btn-delete grey lighten-3 black-text btn btn-small waves-effect waves-light" href="{{ url_for('experience_page.delete_experience', id=experience.id) }}">Delete</a>
         </td>
         </tr>
     {% endfor %}
@@ -41,5 +41,5 @@
 {% endif %}
 
 <div class="table-btn">
-    <a class="waves-effect waves-light btn btn-large" href="{{ url_for('experience_page.add_experience') }}"><i class="material-icons left">work</i>Add Experience</a>
+    <a class="btn waves-effect waves-light" href="{{ url_for('experience_page.add_experience') }}"><i class="material-icons left">work</i>Add Experience</a>
 </div>
