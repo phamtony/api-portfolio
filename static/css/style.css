@@ -33,6 +33,16 @@ h2 {
     padding-bottom: 10px;
 }
 
+nav {
+    height: 100px;
+    line-height: 100px;
+}
+nav .nav-wrapper i {
+    margin-right: 5px;
+    line-height: 100px;
+    height: 100px;
+}
+
 .box-framing {
     background-color: var(--white);
     padding: 20px;
@@ -52,7 +62,10 @@ table img {
     max-width: 300px;
     width: 100%;
 }
-
+.brand-logo img {
+    width: 150px;
+    vertical-align: middle;
+}
 table {
     margin: 20px 0;
     width: 100%;
