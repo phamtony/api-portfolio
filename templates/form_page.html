@@ -7,35 +7,36 @@
     <div class="container">
         <div class="row">
             <div class="col s12 m10 offset-m1">
-                <h2>{{ title }} Info</h2>
+                <div class="box-framing z-depth-1">
+                    <h2>{{ title }} Info</h2>
 
-                {% if title == "About" or title == "Project" %}
-                    {% if image %}
-                        <p>Current Uploaded Image:</p>
-                        <div style="padding-bottom: 20px;">
-                            <img class="materialboxed edit-form-img" src="/static/images/{{ image }}" alt="">
-                        </div>
+                    {% if title == "About" or title == "Project" %}
+                        {% if image %}
+                            <p>Current Uploaded Image:</p>
+                            <div style="padding-bottom: 20px;">
+                                <img class="materialboxed edit-form-img" src="/static/images/{{ image }}" alt="">
+                            </div>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
 
-                {% if ckEditor %}
-                    {{ ckeditor.load() }}
-                    {{ ckeditor.config(name='body') }}
-                {% endif %}
+                    {% if ckEditor %}
+                        {{ ckeditor.load() }}
+                        {{ ckeditor.config(name='body') }}
+                    {% endif %}
 
-                <form action method="POST" enctype="multipart/form-data">
-                    {{ form.csrf_token }}
+                    <form action method="POST" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
 
-                    {% for field in form %}
-                        {{ render_field(field) }}
-                    {% endfor %}
+                        {% for field in form %}
+                            {{ render_field(field) }}
+                        {% endfor %}
 
-                    <div class="form__button-container">
-                        <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit" value="Submit">
-                        <a class="waves-effect waves-light btn grey darken-1" href="{{ url_for('main_page.home') }}#{{ title }}">Go Back</a>
-                    </div>
-                </form>
-
+                        <div class="form__button-container">
+                            <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit" value="Submit">
+                            <a class="waves-effect waves-light btn grey darken-1" href="{{ url_for('main_page.home') }}#{{ title }}">Go Back</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

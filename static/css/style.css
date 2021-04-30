@@ -1,20 +1,58 @@
-h2, h3 {
-    border-bottom: 1px solid black;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+/***************************/
+/***       General      ***/
+/***************************/
+:root {
+    --white: #fff;
+    --black: #000;
+    --red: #b71c1c;
+    --green: #81c784;
+    --light-grey: #f8f8f8;
+    --opensans: 'Open Sans', sans-serif;
+    --poppins: 'Poppins', sans-serif;
+    --easing: cubic-bezier(0.645,0.045,0.355,1);
+    --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
+}
+body {
+    font-family: var(--opensans);
+    background-color: var(--light-grey);
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--poppins);
+}
+
+h3 {
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin: 15px 0;
+    width: fit-content;
 }
 h2 {
-    border-bottom: 0;
-    margin-bottom: 30px;
+    margin: 15px 0 30px 0;
+    padding-bottom: 10px;
+}
+
+.box-framing {
+    background-color: var(--white);
+    padding: 20px;
+    margin-top: 20px;
+    position: relative;
+}
+.page-section {
+    top: -200px;
+    position: absolute;
 }
 table img {
     max-width: 100px;
     width: 100%;
 }
+
 .edit-form-img {
     max-width: 300px;
     width: 100%;
 }
+
 table {
     margin: 20px 0;
     width: 100%;
@@ -31,25 +69,22 @@ table td.button__container {
     table-layout: initial;
     overflow: initial;
 }
-.table-btn {
-    margin: 0 0 75px 0;
-}
 .form__button-container {
     margin: 20px 0 0 0;
 }
 
+.messaging {
+    font-size: 13px;
+}
 .error-message {
-    color: #b71c1c;
-    font-size: 12px;
+    color: var(--red);
     margin-top: 0;
 }
 .text-warning {
-    color: #b71c1c;
-    font-size: 12px;
+    color: var(--red);
     padding-bottom: 10px;
 }
 .text-success {
-    color: #81c784;
-    font-size: 12px;
+    color: var(--green);
     padding-bottom: 10px;
 }
