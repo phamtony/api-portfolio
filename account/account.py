@@ -33,4 +33,4 @@ def my_account():
         flash(message)
         db.session.commit()
         return redirect(url_for("account.my_account"))
-    return render_template("account.html", form=form)
+    return render_template("account.html", form=form, api=user_info.api_key)

@@ -24,6 +24,12 @@
                         {{ render_field(field) }}
                     {% endfor %}
 
+                    <div class="json-link">
+                        {% if api %}
+                            <a target="_blank" href="/json?api={{ api }}">Check out your JSON</a>
+                        {% endif %}
+                    </div>
+                
                     <div class="form__button-container">
                         <input class="waves-effect waves-light btn" type="submit" name="submit" id="submit" value="Save">
                         <a class="waves-effect waves-light btn deep-orange lighten-2" id="api_button">Generate API</a>
@@ -52,7 +58,9 @@
 
         document.getElementById('api_button').addEventListener('click', function (e) {
             e.preventDefault();
-            document.getElementById('api_key').value = generateAPI(24)
+            document.getElementById('api_key').value = generateAPI(24);
+            document.getElementById('api_key').focus();
+            document.querySelector('.json-link').innerHTML = '<p class="text-success">Save your new generated API key to see your new JSON.</p>';
         });
     </script>
 {% endblock %}
