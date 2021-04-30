@@ -1,19 +1,36 @@
-<nav class="red lighten-2">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col s12">
-                <div class="nav-wrapper">
-                  <a class="brand-logo" href="{{ url_for('main_page.home') }}"><img src="{{ url_for('static', filename='logo/logo_w.png') }}" alt=""></a>
+<div class="container is-fluid main-red-bg">
+    <nav class="navbar main-red-bg" role="navigation" aria-label="main navigation">
 
-                  {% if title == "Register" or title == "Login" %}
-                  {% else %}
-                      <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="{{ url_for('account.my_account') }}"><i class="material-icons left">manage_accounts</i>My Account</a></li>
-                        <li><a href="{{ url_for('register_login_page.logout') }}"><i class="material-icons left">logout</i>Log Off</a></li>
-                      </ul>
-                  {% endif %}
-                </div>
+        <div class="navbar-brand is-align-items-center">
+            <a class="brand-logo" href="{{ url_for('main_page.home') }}"><img
+                    src="{{ url_for('static', filename='logo/logo_w.png') }}" alt="">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+               data-target="navbar_portfolio">
+                <span class="white" aria-hidden="true"></span>
+                <span class="white" aria-hidden="true"></span>
+                <span class="white" aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbar_portfolio" class="navbar-menu main-red-bg">
+            <div class="navbar-end">
+                {% if title == "Register" or title == "Login" %}
+                {% else %}
+                    <a class="navbar-item" href="{{ url_for('account.my_account') }}">
+                        <div class="navbar-item">
+                            <i class="material-icons">manage_accounts</i>My Account
+                        </div>
+                    </a>
+                    <a class="navbar-item" href="{{ url_for('register_login_page.logout') }}">
+                        <div class="navbar-item">
+                            <i class="material-icons">logout</i>Log Off
+                        </div>
+                    </a>
+                {% endif %}
             </div>
         </div>
-    </div>
-</nav>
+
+    </nav>
+</div>

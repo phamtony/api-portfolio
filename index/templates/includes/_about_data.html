@@ -1,5 +1,5 @@
 {% if about_info %}
-    <table class="responsive-table">
+    <table class="table">
         <thead>
         <tr>
             <th>Intro</th>
@@ -14,7 +14,7 @@
         <tbody>
         <tr>
             <td>{{ about_info.intro }}</td>
-            <td><img class="materialboxed" src="/static/images/{{ about_info.image }}" alt=""></td>
+            <td><img src="/static/images/{{ about_info.image }}" alt=""></td>
             <td>{{ about_info.section_one }}</td>
             <td>{{ about_info.skills_work }}</td>
             <td>{{ about_info.section_two }}</td>
@@ -25,7 +25,7 @@
 
     <div class="table-btn">
         <a class="btn waves-effect waves-light" href="{{ url_for('about_page.edit_about') }}"><i class="material-icons">edit</i>Edit About Info</a>
-        <a class="btn-delete grey lighten-3 black-text btn waves-effect waves-light" href="{{ url_for('about_page.delete_about') }}"><i class="material-icons">delete_forever</i>Delete About Info</a>
+        <a class="btn-delete grey lighten-3 btn waves-effect waves-light" href="{{ url_for('about_page.delete_about') }}"><i class="material-icons">delete_forever</i>Delete About Info</a>
     </div>
 {% else %}
     <div class="table-btn">

@@ -5,6 +5,7 @@
     --white: #fff;
     --black: #000;
     --main-light-red: #e57373;
+    --main-light-red-hover: #dc5555;
     --main-teal: #26a69a;
     --red: #c62828;
     --green: #2e7d32;
@@ -15,8 +16,8 @@
     --easing: cubic-bezier(0.645,0.045,0.355,1);
     --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
 }
-
-.black-text {color: var(--black);}
+.main-red-bg {background-color: var(--main-light-red);}
+.white {color: var(--white);}
 
 body {
     font-family: var(--opensans);
@@ -43,25 +44,20 @@ nav {
     height: 100px;
     line-height: 100px;
 }
-nav .nav-wrapper i {
+nav .navbar-item i {
     margin-right: 5px;
-    line-height: 100px;
-    height: 100px;
+}
+.navbar-item {
+    color: var(--white) !important;
+    transition: var(--transition);
+}
+a.navbar-item:hover {
+    background-color: var(--main-light-red-hover) !important;
 }
 
-.box-framing {
-    background-color: var(--white);
-    padding: 20px;
-    margin-top: 20px;
-    position: relative;
-}
 .page-section {
     top: -200px;
     position: absolute;
-}
-table img {
-    max-width: 100px;
-    width: 100%;
 }
 
 .edit-form-img {
@@ -72,42 +68,19 @@ table img {
     width: 150px;
     vertical-align: middle;
 }
-table {
-    margin: 20px 0;
-    width: 100%;
-    word-wrap: break-word;
-    table-layout: fixed;
-}
-table td {
-    table-layout:fixed;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-table td.button__container {
-    table-layout: initial;
-    overflow: initial;
-}
-.btn i.material-icons {
-    margin-right: 5px;
-    vertical-align: middle;
-}
-.form__button-container {
-    margin: 20px 0 0 0;
-}
 
-.messaging {
-    font-size: 13px;
-}
-.error-message {
-    color: var(--red);
-    margin-top: 0;
-}
-.text-warning {
-    color: var(--red);
-    padding-bottom: 10px;
-}
-.text-success {
-    color: var(--green);
-    padding-bottom: 10px;
-}
+/*.messaging {*/
+/*    font-size: 13px;*/
+/*}*/
+/*.error-message {*/
+/*    color: var(--red);*/
+/*    margin-top: 0;*/
+/*}*/
+/*.text-warning {*/
+/*    color: var(--red);*/
+/*    padding-bottom: 10px;*/
+/*}*/
+/*.text-success {*/
+/*    color: var(--green);*/
+/*    padding-bottom: 10px;*/
+/*}*/

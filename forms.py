@@ -15,11 +15,11 @@ class GeneralForm(FlaskForm):
 
 
 class AboutForm(FlaskForm):
-    intro = TextAreaField("Intro", render_kw={"class": "materialize-textarea"})
+    intro = TextAreaField("Intro")
     image = FileField("")
-    section_one = TextAreaField("Section One", render_kw={"class": "materialize-textarea"})
+    section_one = TextAreaField("Section One")
     skills_work = StringField("List skills, use ',' to separate.")
-    section_two = TextAreaField("Section Two", render_kw={"class": "materialize-textarea"})
+    section_two = TextAreaField("Section Two")
     skills_goto = StringField("List skills, use ',' to separate.")
 
 
