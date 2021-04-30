@@ -23,7 +23,7 @@ def skills():
         )
         db.session.add(new_skills)
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Skills")
 
     return render_template("form_page.html", form=form, title="Skills")
 
@@ -45,7 +45,7 @@ def edit_skills():
         skills_info.database = edit_skills.database.data
         skills_info.misc = edit_skills.misc.data
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Skills")
 
     return render_template("form_page.html", form=edit_skills, title="Skills")
 
@@ -56,4 +56,4 @@ def delete_skills():
     skills_info = Skills.query.filter_by(general_id=current_user.id).first()
     db.session.delete(skills_info)
     db.session.commit()
-    return redirect(url_for("main_page.home"))
+    return redirect(url_for("main_page.home")+"#Skills")

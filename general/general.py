@@ -24,7 +24,7 @@ def general():
         )
         db.session.add(new_general)
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#General")
 
     return render_template("form_page.html", form=form, title="General", ckEditor=True)
 
@@ -49,5 +49,5 @@ def edit_general():
         general_info.linkedin = edit_general.linkedin.data
         general_info.front_text = edit_general.front_text.data
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#General")
     return render_template("form_page.html", form=edit_general, title="General", ckEditor=True)

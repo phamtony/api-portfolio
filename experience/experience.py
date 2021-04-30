@@ -24,7 +24,7 @@ def add_experience():
         )
         db.session.add(new_experience)
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Experience")
 
     return render_template("form_page.html", form=form, title="Experience", ckEditor=True)
 
@@ -47,7 +47,7 @@ def edit_experience(id):
         experience.link = edit_experience.link.data
         experience.description = edit_experience.description.data
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Experience")
 
     return render_template("form_page.html", form=edit_experience, title="Experience", ckEditor=True)
 
@@ -58,4 +58,4 @@ def delete_experience(id):
     experience_info = Experience.query.get(id)
     db.session.delete(experience_info)
     db.session.commit()
-    return redirect(url_for("main_page.home"))
+    return redirect(url_for("main_page.home")+"#Experience")

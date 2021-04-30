@@ -31,7 +31,7 @@ def about():
         )
         db.session.add(new_about)
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#About")
 
     return render_template("form_page.html", form=form, title="About")
 
@@ -60,7 +60,7 @@ def edit_about():
         about_info.section_two = edit_about.section_two.data
         about_info.skills_goto = edit_about.skills_goto.data
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#About")
     return render_template("form_page.html", form=edit_about, image=image, title="About")
 
 
@@ -70,4 +70,4 @@ def delete_about():
     about_info = About.query.filter_by(general_id=current_user.id).first()
     db.session.delete(about_info)
     db.session.commit()
-    return redirect((url_for("main_page.home")))
+    return redirect(url_for("main_page.home")+"#About")

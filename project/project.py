@@ -31,7 +31,7 @@ def add_project():
         )
         db.session.add(new_project)
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Project")
 
     return render_template("form_page.html", form=form, title="Project")
 
@@ -60,7 +60,7 @@ def edit_project(id):
         project_info.description = edit_project.description.data
         project_info.tech_list = edit_project.tech_list.data
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Project")
 
     return render_template("form_page.html", form=edit_project, title="Project", image=image)
 
@@ -71,4 +71,4 @@ def delete_project(id):
     project_info = Project.query.get(id)
     db.session.delete(project_info)
     db.session.commit()
-    return redirect(url_for("main_page.home"))
+    return redirect(url_for("main_page.home")+"#Project")
