@@ -88,6 +88,10 @@ table td.button__container {
     table-layout: initial;
     overflow: initial;
 }
+.btn i.material-icons {
+    margin-right: 5px;
+    vertical-align: middle;
+}
 .form__button-container {
     margin: 20px 0 0 0;
 }

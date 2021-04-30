@@ -20,12 +20,12 @@
     </table>
 
     <div class="table-btn">
-        <a class="btn waves-effect waves-light" href="{{ url_for('skills_page.edit_skills') }}"><i class="material-icons left">edit</i>Edit Skills Info</a>
-        <a class="btn-delete grey lighten-3 black-text btn waves-effect waves-light" href="{{ url_for('skills_page.delete_skills') }}"><i class="material-icons left">delete_forever</i>Delete Skills Info</a>
+        <a class="btn waves-effect waves-light" href="{{ url_for('skills_page.edit_skills') }}"><i class="material-icons">edit</i>Edit Skills Info</a>
+        <a class="btn-delete grey lighten-3 black-text btn waves-effect waves-light" href="{{ url_for('skills_page.delete_skills') }}"><i class="material-icons">delete_forever</i>Delete Skills Info</a>
     </div>
 
 {% else %}
     <div class="table-btn">
-        <a class="btn waves-effect waves-light" href="{{ url_for('skills_page.skills') }}"><i class="material-icons left">download_done</i>Add Skills Info</a>
+        <a class="btn waves-effect waves-light" href="{{ url_for('skills_page.skills') }}"><i class="material-icons">download_done</i>Add Skills Info</a>
     </div>
 {% endif %}
