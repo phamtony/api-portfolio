@@ -1,27 +1,90 @@
- <table class="table">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Occupation</th>
-        <th>Email</th>
-        <th>Github</th>
-        <th>Linkedin</th>
-        <th>Intro Text</th>
-    </tr>
-    </thead>
+<div class="content">
+    <div class="columns is-flex-wrap-wrap">
+        <div class="column is-full">
+            <div class="columns">
+                <div class="column is-one-fourth">
+                    <p class="has-text-weight-semibold">Name:</p>
+                </div>
+                <div class="column is-three-quarters">
+                    <p>{{ general_info.name }}</p>
+                </div>
+            </div>
+        </div>
 
-    <tbody>
-    <tr>
-        <td>{{ general_info.name }}</td>
-        <td>{{ general_info.occupation }}</td>
-        <td>{{ general_info.email }}</td>
-        <td>{{ general_info.github }}</td>
-        <td>{{ general_info.linkedin }}</td>
-        <td>{{ general_info.front_text }}</td>
-    </tr>
-    </tbody>
-</table>
+        <div class="column is-full">
+            <div class="columns">
+                <div class="column is-one-fourth">
+                    <p class="has-text-weight-semibold">Occupation:</p>
+                </div>
+                <div class="column is-three-quarters">
+                    <p>{{ general_info.occupation }}</p>
+                </div>
+            </div>
+        </div>
 
-<div class="table-btn">
-    <a class="btn waves-effect waves-light" href="{{ url_for('general_page.edit_general') }}"><i class="material-icons">edit</i>Edit General Info</a>
+        <div class="column is-full">
+            <div class="columns">
+                <div class="column is-one-fourth">
+                    <p class="has-text-weight-semibold">Email:</p>
+                </div>
+                <div class="column is-three-quarters">
+                    <p>{{ general_info.email }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-full">
+            <div class="columns">
+                <div class="column is-one-fourth">
+                    <p class="has-text-weight-semibold">Github:</p>
+                </div>
+                <div class="column is-three-quarters">
+                    <p>{{ general_info.github }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-full">
+            <div class="columns">
+                <div class="column is-one-fourth">
+                    <p class="has-text-weight-semibold">LinkedIn:</p>
+                </div>
+                <div class="column is-three-quarters">
+                    <p>{{ general_info.linkedin }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        {% if general_info.api_key %}
+            <div class="column is-full">
+                <div class="columns">
+                    <div class="column is-one-fourth">
+                        <p class="has-text-weight-semibold">JSON:</p>
+                    </div>
+                    <div class="column is-three-quarters">
+                        <p><a class="black" target="_blank" href="/json?api={{ general_info.api_key }}">Click Here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+        <div class="column is-full">
+            <p class="has-text-weight-semibold">Intro:</p>
+            <p>
+                {{ general_info.front_text|safe }}
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="field">
+    <p class="control">
+        <a class="button light-grey-bg" href="{{ url_for('general_page.edit_general') }}"><span class="icon"><i
+                class="material-icons">edit</i></span><span>Edit General Info</span></a>
+    </p>
 </div>

@@ -19,14 +19,18 @@
                 {% if title == "Register" or title == "Login" %}
                 {% else %}
                     <a class="navbar-item" href="{{ url_for('account.my_account') }}">
-                        <div class="navbar-item">
-                            <i class="material-icons">manage_accounts</i>My Account
-                        </div>
+                        <span class="icon">
+                            <i class="material-icons">manage_accounts</i>
+                        </span>
+                        <span>My Account</span>
                     </a>
                     <a class="navbar-item" href="{{ url_for('register_login_page.logout') }}">
-                        <div class="navbar-item">
-                            <i class="material-icons">logout</i>Log Off
-                        </div>
+                        <span class="icon">
+                            <i class="material-icons">logout</i>
+                        </span>
+                        <span>
+                            Log Off
+                        </span>
                     </a>
                 {% endif %}
             </div>

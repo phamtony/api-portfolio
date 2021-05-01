@@ -1,45 +1,55 @@
- {% if experiences %}
+{% if experiences %}
     <table class="table">
-    <thead>
-    <tr>
-        <th>Company Name</th>
-        <th>Position</th>
-        <th>Time</th>
-        <th>Link</th>
-        <th>Description</th>
-        <th></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    {% for experience in experiences %}
+        <thead>
         <tr>
-            <td>
-                {{ experience.name }}
-            </td>
-        <td>
-                {{ experience.position }}
-            </td>
-        <td>
-                {{ experience.time }}
-            </td>
-        <td>
-                {{ experience.link }}
-            </td>
-        <td>
-                {{ experience.description|safe }}
-            </td>
-
-        <td class="button__container">
-            <a class="btn btn-small waves-effect waves-light" href="{{ url_for('experience_page.edit_experience', id=experience.id) }}">Edit</a>
-            <a class="btn-delete grey lighten-3 btn btn-small waves-effect waves-light" href="{{ url_for('experience_page.delete_experience', id=experience.id) }}">Delete</a>
-        </td>
+            <th>Company Name</th>
+            <th>Position</th>
+            <th>Time</th>
+            <th>Link</th>
+            <th>Description</th>
+            <th></th>
         </tr>
-    {% endfor %}
-    </tbody>
+        </thead>
+
+        <tbody>
+        {% for experience in experiences %}
+            <tr>
+                <td>
+                    {{ experience.name }}
+                </td>
+                <td>
+                    {{ experience.position }}
+                </td>
+                <td>
+                    {{ experience.time }}
+                </td>
+                <td>
+                    {{ experience.link }}
+                </td>
+                <td>
+                    {{ experience.description|safe }}
+                </td>
+
+                <td>
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button light-grey-bg" href="{{ url_for('experience_page.edit_experience', id=experience.id) }}"><span>Edit</span></a>
+                        </p>
+                        <p class="control">
+                            <a class="button red-bg white"
+                               href="{{ url_for('experience_page.delete_experience', id=experience.id) }}"><span>Delete</span></a>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 {% endif %}
 
-<div class="table-btn">
-    <a class="btn waves-effect waves-light" href="{{ url_for('experience_page.add_experience') }}"><i class="material-icons">work</i>Add Experience</a>
+<div class="field">
+    <p class="control">
+        <a class="button main-teal-bg white" href="{{ url_for('experience_page.add_experience') }}"><span
+                class="icon"><i class="material-icons">work</i></span><span>Add Experience</span></a>
+    </p>
 </div>

@@ -1,31 +1,71 @@
 {% if skills %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Language</th>
-            <th>Framework/Library</th>
-            <th>Database</th>
-            <th>Misc</th>
-        </tr>
-        </thead>
+    <div class="content">
+        <div class="columns is-flex-wrap-wrap">
 
-        <tbody>
-        <tr>
-            <td>{{ skills.language }}</td>
-            <td>{{ skills.framework_library }}</td>
-            <td>{{ skills.database }}</td>
-            <td>{{ skills.misc }}</td>
-        </tr>
-        </tbody>
-    </table>
+            <div class="column is-full">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Language:</p>
+                    </div>
+                    <div class="column is-two-thirds">
+                        <p>{{ skills.language }}</p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="table-btn">
-        <a class="btn waves-effect waves-light" href="{{ url_for('skills_page.edit_skills') }}"><i class="material-icons">edit</i>Edit Skills Info</a>
-        <a class="btn-delete grey lighten-3 btn waves-effect waves-light" href="{{ url_for('skills_page.delete_skills') }}"><i class="material-icons">delete_forever</i>Delete Skills Info</a>
+            <div class="column is-full">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Framework/Library:</p>
+                    </div>
+                    <div class="column is-two-thirds">
+                        <p>{{ skills.framework_library }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-full">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Database:</p>
+                    </div>
+                    <div class="column is-two-thirds">
+                        <p>{{ skills.database }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-full">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Misc:</p>
+                    </div>
+                    <div class="column is-two-thirds">
+                        <p>{{ skills.misc }}</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <p class="control">
+            <a class="button light-grey-bg" href="{{ url_for('skills_page.edit_skills') }}"><span class="icon"><i
+                    class="material-icons">edit</i></span><span>Edit Skills Info</span></a>
+        </p>
+        <p class="control">
+            <a class="button red-bg white" href="{{ url_for('skills_page.delete_skills') }}"><span class="icon"><i
+                    class="material-icons">delete_forever</i></span><span>Delete Skills Info</span></a>
+        </p>
     </div>
 
 {% else %}
-    <div class="table-btn">
-        <a class="btn waves-effect waves-light" href="{{ url_for('skills_page.skills') }}"><i class="material-icons">download_done</i>Add Skills Info</a>
+    <div class="field">
+        <p class="control">
+            <a class="button main-teal-bg white" href="{{ url_for('skills_page.skills') }}"><span class="icon"><i
+                    class="material-icons">download_done</i></span><span>Add Skills Info</span></a>
+        </p>
     </div>
 {% endif %}

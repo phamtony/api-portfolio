@@ -9,8 +9,10 @@
     --main-teal: #38bbb0;
     --main-teal-hover: #317f7d;
     --red: #c62828;
+    --red-hover: #9c2b2b;
     --green: #2e7d32;
     --light-grey: #eeeeee;
+    --light-grey-hover: #dedede;
     --white-grey: #f8f8f8;
     --opensans: 'Open Sans', sans-serif;
     --poppins: 'Poppins', sans-serif;
@@ -19,6 +21,8 @@
 }
 .main-red-bg {background-color: var(--main-light-red);}
 .main-teal-bg {background-color: var(--main-teal);}
+.light-grey-bg {background-color: var(--light-grey);}
+.red-bg {background-color: var(--red);}
 .main-red {color: var(--main-light-red);}
 .white {color: var(--white);}
 .black {color: var(--black);}
@@ -36,9 +40,11 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400 !important;
 }
 
-h3 {
+h2 {
     border-bottom: 2px solid black;
     width: fit-content;
+    padding-bottom: 5px;
+    margin-top: 0 !important;
 }
 
 nav {
@@ -56,6 +62,9 @@ a.navbar-item:hover {
     background-color: var(--main-light-red-hover) !important;
 }
 
+.content {
+    position: relative;
+}
 .page-section {
     top: -200px;
     position: absolute;
@@ -80,6 +89,13 @@ a.navbar-item:hover {
 }
 .button.main-teal-bg:hover {
     background-color: var(--main-teal-hover);
+    color: var(--white);
+}
+.button.light-grey-bg:hover {
+    background-color: var(--light-grey-hover);
+}
+.button.red-bg:hover {
+    background-color: var(--red-hover);
     color: var(--white);
 }
 

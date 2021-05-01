@@ -1,37 +1,47 @@
 {% if education_list %}
-     <table class="table">
-    <thead>
-    <tr>
-        <th>School Name</th>
-        <th>Duration</th>
-        <th>Degree</th>
-        <th></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    {% for education in education_list %}
+    <table class="table">
+        <thead>
         <tr>
-            <td>
-                {{ education.school }}
-            </td>
-        <td>
-                {{ education.time }}
-            </td>
-        <td>
-                {{ education.degree }}
-            </td>
-        <td class="button__container">
-            <a class="btn btn-small waves-effect waves-light" href="{{ url_for('education_page.edit_education', id=education.id) }}">Edit</a>
-            <a class="btn-delete grey lighten-3 btn btn-small waves-effect waves-light" href="{{ url_for('education_page.delete_education', id=education.id) }}">Delete</a>
-        </td>
+            <th>School Name</th>
+            <th>Duration</th>
+            <th>Degree</th>
+            <th></th>
         </tr>
-    {% endfor %}
-    </tbody>
+        </thead>
+
+        <tbody>
+        {% for education in education_list %}
+            <tr>
+                <td>
+                    {{ education.school }}
+                </td>
+                <td>
+                    {{ education.time }}
+                </td>
+                <td>
+                    {{ education.degree }}
+                </td>
+                <td>
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button light-grey-bg" href="{{ url_for('education_page.edit_education', id=education.id) }}"><span>Edit</span></a>
+                            </p>
+                        <p class="control">
+                            <a class="button red-bg white"
+                               href="{{ url_for('education_page.delete_education', id=education.id) }}"><span>Delete</span></a>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 {% endif %}
 
-<div class="table-btn">
-    <a class="btn waves-effect waves-light" href="{{ url_for('education_page.add_education') }}"><i class="material-icons">school</i>Add Education</a>
+<div class="field">
+    <p class="control">
+        <a class="button main-teal-bg white" href="{{ url_for('education_page.add_education') }}"><span class="icon"><i
+                class="material-icons">school</i></span><span>Add Education</span></a>
+    </p>
 </div>
 

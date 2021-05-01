@@ -5,51 +5,69 @@
 {% block content %}
     <div class="container">
         <div class="columns is-flex-wrap-wrap">
-            <div class="column is-half">
-                <div class="box">
-                    <div class="page-section" id="General"></div>
-                    <h3>General</h3>
-                    {% include'/includes/_general_data.html' %}
-                </div>
-                </div>
 
             <div class="column is-half">
-                <div class="box">
-                    <div class="page-section" id="About"></div>
-                    <h3>About</h3>
-                    {% include'/includes/_about_data.html' %}
+                <div class="columns is-flex-wrap-wrap">
+                    <div class="column is-full">
+                        <div class="box">
+                            <div class="content">
+                                <div class="page-section" id="General"></div>
+                                <h2>General</h2>
+                                {% include'/includes/_general_data.html' %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column is-full">
+                        <div class="box">
+                            <div class="content">
+                                <div class="page-section" id="Skills"></div>
+                                <h2>Skills</h2>
+                                {% include'/includes/_skills_data.html' %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="column is-half">
                 <div class="box">
-                    <div class="page-section" id="Experience"></div>
-                    <h3>Experience</h3>
-                    {% include'/includes/_experience_data.html' %}
+                    <div class="content">
+                        <div class="page-section" id="About"></div>
+                        <h2>About</h2>
+                        {% include'/includes/_about_data.html' %}
+                    </div>
                 </div>
             </div>
 
-            <div class="column is-half">
+
+            <div class="column is-full">
                 <div class="box">
-                    <div class="page-section" id="Education"></div>
-                    <h3>Education</h3>
-                    {% include'/includes/_education_data.html' %}
+                    <div class="content">
+                        <div class="page-section" id="Experience"></div>
+                        <h2>Experience</h2>
+                        {% include'/includes/_experience_data.html' %}
+                    </div>
                 </div>
             </div>
 
-            <div class="column is-half">
+            <div class="column is-full">
                 <div class="box">
-                    <div class="page-section" id="Skills"></div>
-                    <h3>Skills</h3>
-                    {% include'/includes/_skills_data.html' %}
+                    <div class="content">
+                        <div class="page-section" id="Education"></div>
+                        <h2>Education</h2>
+                        {% include'/includes/_education_data.html' %}
+                    </div>
                 </div>
             </div>
 
-            <div class="column is-half">
+            <div class="column is-full">
                 <div class="box">
-                    <div class="page-section" id="Project"></div>
-                    <h3>Projects</h3>
-                    {% include'/includes/_project_data.html' %}
+                    <div class="content">
+                        <div class="page-section" id="Project"></div>
+                        <h2>Projects</h2>
+                        {% include'/includes/_project_data.html' %}
+                    </div>
                 </div>
             </div>
 
@@ -62,9 +80,9 @@
 {% block scripts %}
     {{ super() }}
     <script>
-        var delete_btns = document.querySelectorAll('.btn-delete');
+        const delete_btns = document.querySelectorAll('.btn-delete');
 
-        for (var btn of delete_btns) {
+        for (let btn of delete_btns) {
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (window.confirm('Delete Info?')) {

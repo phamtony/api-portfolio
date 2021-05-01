@@ -5,19 +5,22 @@
 
 {% block content %}
     <div class="container">
-        <div class="columns is-flex-wrap-wrap">
-            <div class="">
+        <div class="columns is-justify-content-center">
+            <div class="column is-10-tablet is-8-desktop">
                 <div class="box">
-                    <h2>{{ title }} Info</h2>
+                    <div class="content">
+                        <h1>{{ title }} Info</h1>
 
-                    {% if title == "About" or title == "Project" %}
-                        {% if image %}
-                            <p>Current Uploaded Image:</p>
-                            <div style="padding-bottom: 20px;">
-                                <img class="edit-form-img" src="/static/images/{{ image }}" alt="">
-                            </div>
+                        {% if title == "About" or title == "Project" %}
+                            {% if image %}
+                                <p>Current Uploaded Image:</p>
+                                <div>
+                                    <img class="edit-form-img" src="/static/images/{{ image }}" alt="">
+                                </div>
+                                <p class="help">Upload a different image to replace the current one.</p>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
+                    </div>
 
                     {% if ckEditor %}
                         {{ ckeditor.load() }}
@@ -31,9 +34,14 @@
                             {{ render_field(field) }}
                         {% endfor %}
 
-                        <div class="block">
-                            <input class="btn waves-effect waves-light" type="submit" name="submit" id="submit" value="Submit">
-                            <a class="grey lighten-3 btn waves-effect waves-light" href="{{ url_for('main_page.home') }}#{{ title }}">Go Back</a>
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <input class="button main-teal-bg white" type="submit" name="submit" id="submit" value="Submit">
+                            </p>
+                            <p class="control">
+                            <a class="button color-none"
+                               href="{{ url_for('main_page.home') }}#{{ title }}">Go Back</a>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -45,6 +53,14 @@
 {% block scripts %}
     {{ super() }}
     <script>
+        const fileInput = document.querySelector('#image');
+        fileInput.onchange = () => {
+            if (fileInput.files.length > 0) {
+                const fileName = document.querySelector('.file-name');
+                fileName.textContent = fileInput.files[0].name;
+            }
+        }
+
         //image lightbox MAKE FUNCTION or PLUGIN
     </script>
 {% endblock %}
