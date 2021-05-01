@@ -1,41 +1,44 @@
 {% if education_list %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>School Name</th>
-            <th>Duration</th>
-            <th>Degree</th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        {% for education in education_list %}
+    <div class="table-container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
             <tr>
-                <td>
-                    {{ education.school }}
-                </td>
-                <td>
-                    {{ education.time }}
-                </td>
-                <td>
-                    {{ education.degree }}
-                </td>
-                <td>
-                    <div class="field is-grouped">
-                        <p class="control">
-                            <a class="button light-grey-bg" href="{{ url_for('education_page.edit_education', id=education.id) }}"><span>Edit</span></a>
-                            </p>
-                        <p class="control">
-                            <a class="button red-bg white"
-                               href="{{ url_for('education_page.delete_education', id=education.id) }}"><span>Delete</span></a>
-                        </p>
-                    </div>
-                </td>
+                <th>School Name</th>
+                <th>Duration</th>
+                <th>Degree</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+            {% for education in education_list %}
+                <tr>
+                    <td>
+                        {{ education.school }}
+                    </td>
+                    <td class="white-space-nowrap">
+                        {{ education.time }}
+                    </td>
+                    <td class="white-space-nowrap">
+                        {{ education.degree }}
+                    </td>
+                    <td>
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button light-grey-bg"
+                                   href="{{ url_for('education_page.edit_education', id=education.id) }}"><span>Edit</span></a>
+                            </p>
+                            <p class="control">
+                                <a class="button red-bg white btn-delete"
+                                   href="{{ url_for('education_page.delete_education', id=education.id) }}"><span>Delete</span></a>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endif %}
 
 <div class="field">

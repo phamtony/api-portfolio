@@ -22,7 +22,7 @@ def add_education():
         )
         db.session.add(new_education)
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Education")
 
     return render_template("form_page.html", form=form, title="Education")
 
@@ -41,7 +41,7 @@ def edit_education(id):
         education.time = edit_education.time.data
         education.degree = edit_education.degree.data
         db.session.commit()
-        return redirect(url_for("main_page.home"))
+        return redirect(url_for("main_page.home")+"#Education")
 
     return render_template("form_page.html", form=edit_education, title="Education")
 
@@ -52,4 +52,4 @@ def delete_education(id):
     education_info = Education.query.get(id)
     db.session.delete(education_info)
     db.session.commit()
-    return redirect(url_for("main_page.home"))
+    return redirect(url_for("main_page.home")+"#Education")

@@ -46,6 +46,13 @@ h2 {
     padding-bottom: 5px;
     margin-top: 0 !important;
 }
+.white-space-nowrap {
+    white-space: nowrap;
+}
+.min-max-width-300 {
+    min-width: 300px;
+    max-width: 300px;
+}
 
 nav {
     height: 100px;
@@ -64,6 +71,10 @@ a.navbar-item:hover {
 
 .content {
     position: relative;
+}
+.content figure {
+    margin-left: 0;
+    margin-right: 0;
 }
 .page-section {
     top: -200px;

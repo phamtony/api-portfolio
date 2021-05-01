@@ -1,46 +1,48 @@
 {% if projects %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Project Name</th>
-            <th>Project Link</th>
-            <th>Github Link</th>
-            <th>Screenshot</th>
-            <th>Description</th>
-            <th>Tech List</th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        {% for project in projects %}
+    <div class="table-container">
+        <table class="table is-striped is-hoverable is-fullwidth">
+            <thead>
             <tr>
-                <td>{{ project.name }}</td>
-                <td>{{ project.link }}</td>
-                <td>{{ project.github_link }}</td>
-                <td>
-                    <figure class="image is-128x128">
-                      <img class="is-rounded" src="/static/images/{{ project.screenshot }}" alt="">
-                    </figure>
-                </td>
-                <td>{{ project.description }}</td>
-                <td>{{ project.tech_list }}</td>
-                <td>
-                    <div class="field is-grouped">
-                        <p class="control">
-                            <a class="button light-grey-bg"
-                               href="{{ url_for('project_page.edit_project', id=project.id) }}"><span>Edit</span></a>
-                        </p>
-                        <p class="control">
-                            <a class="button red-bg white"
-                               href="{{ url_for('project_page.delete_project', id=project.id) }}"><span>Delete</span></a>
-                        </p>
-                    </div>
-                </td>
+                <th>Project Name</th>
+                <th>Project Link</th>
+                <th>Github Link</th>
+                <th>Screenshot</th>
+                <th>Description</th>
+                <th>Tech List</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.link }}</td>
+                    <td>{{ project.github_link }}</td>
+                    <td>
+                        <figure class="image is-128x128">
+                            <img src="/static/images/{{ project.screenshot }}" alt="">
+                        </figure>
+                    </td>
+                    <td class="min-max-width-300">{{ project.description }}</td>
+                    <td>{{ project.tech_list }}</td>
+                    <td>
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button light-grey-bg"
+                                   href="{{ url_for('project_page.edit_project', id=project.id) }}"><span>Edit</span></a>
+                            </p>
+                            <p class="control">
+                                <a class="button red-bg white btn-delete"
+                                   href="{{ url_for('project_page.delete_project', id=project.id) }}"><span>Delete</span></a>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endif %}
 
 <div class="field">

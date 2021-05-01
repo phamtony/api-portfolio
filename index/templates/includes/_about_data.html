@@ -5,7 +5,7 @@
             <div class="column is-full">
                 <p class="has-text-weight-semibold">Uploaded Image:</p>
                 <figure class="image is-128x128">
-                    <img class="is-rounded" src="/static/images/{{ about_info.image }}" alt="">
+                    <img src="/static/images/{{ about_info.image }}" alt="">
                 </figure>
             </div>
 
@@ -63,7 +63,7 @@
         </p>
 
         <p class="control">
-            <a class="button red-bg white" href="{{ url_for('about_page.delete_about') }}"><span class="icon"><i
+            <a class="button red-bg white btn-delete" href="{{ url_for('about_page.delete_about') }}"><span class="icon"><i
                     class="material-icons">delete_forever</i></span><span>Delete About Info</span></a>
         </p>
     </div>
