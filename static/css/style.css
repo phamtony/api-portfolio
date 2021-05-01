@@ -6,7 +6,8 @@
     --black: #000;
     --main-light-red: #e57373;
     --main-light-red-hover: #dc5555;
-    --main-teal: #26a69a;
+    --main-teal: #38bbb0;
+    --main-teal-hover: #317f7d;
     --red: #c62828;
     --green: #2e7d32;
     --light-grey: #eeeeee;
@@ -17,27 +18,27 @@
     --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
 }
 .main-red-bg {background-color: var(--main-light-red);}
+.main-teal-bg {background-color: var(--main-teal);}
+.main-red {color: var(--main-light-red);}
 .white {color: var(--white);}
+.black {color: var(--black);}
+
 
 body {
     font-family: var(--opensans);
     background-color: var(--white-grey);
     font-weight: 300;
+    min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--poppins);
+    font-weight: 400 !important;
 }
 
 h3 {
     border-bottom: 2px solid black;
-    padding-bottom: 10px;
-    margin: 15px 0;
     width: fit-content;
-}
-h2 {
-    margin: 15px 0 30px 0;
-    padding-bottom: 10px;
 }
 
 nav {
@@ -60,6 +61,28 @@ a.navbar-item:hover {
     position: absolute;
 }
 
+
+.button {
+    font-weight: 300;
+    border-width: 0;
+    transition: var(--transition);
+}
+.button.color-none {
+    border-width: 1px;
+}
+.label {
+    font-weight: 500;
+}
+
+.button.main-red-bg:hover {
+    background-color: var(--main-light-red-hover);
+    color: var(--white);
+}
+.button.main-teal-bg:hover {
+    background-color: var(--main-teal-hover);
+    color: var(--white);
+}
+
 .edit-form-img {
     max-width: 300px;
     width: 100%;
@@ -68,19 +91,3 @@ a.navbar-item:hover {
     width: 150px;
     vertical-align: middle;
 }
-
-/*.messaging {*/
-/*    font-size: 13px;*/
-/*}*/
-/*.error-message {*/
-/*    color: var(--red);*/
-/*    margin-top: 0;*/
-/*}*/
-/*.text-warning {*/
-/*    color: var(--red);*/
-/*    padding-bottom: 10px;*/
-/*}*/
-/*.text-success {*/
-/*    color: var(--green);*/
-/*    padding-bottom: 10px;*/
-/*}*/

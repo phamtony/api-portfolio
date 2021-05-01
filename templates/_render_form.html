@@ -11,16 +11,28 @@
              <input class="file-path validate" type="text" placeholder="Upload file" />
           </div>
         </div>
+
     {% else %}
-        <div class="input-field">
-            {{ field.label }}
-            {{ field(**kwargs)|safe }}
+
+        <div class="field">
+            {{ field.label(class_="label") }}
+
+            {% if field.errors %}
+                {% set inputClass = "input is-danger" %}
+            {% else %}
+                {% set inputClass = "input" %}
+            {% endif %}
+
+            <div class="control">
+                {{ field(class=inputClass, **kwargs)|safe }}
+            </div>
 
             {% if field.errors %}
                 {% for error in field.errors %}
-                    <p class="messaging error-message">{{ error }}</p>
+                    <p class="help is-danger">{{ error }}</p>
                 {% endfor %}
             {% endif %}
         </div>
+
     {% endif %}
 {% endmacro %}
