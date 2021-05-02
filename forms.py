@@ -11,12 +11,12 @@ class GeneralForm(FlaskForm):
     email = StringField("Email", validators=[Email()])
     github = StringField("Github")
     linkedin = StringField("Linkedin")
-    front_text = CKEditorField("")
+    front_text = CKEditorField("Intro")
 
 
 class AboutForm(FlaskForm):
     image = FileField("")
-    intro = CKEditorField("")
+    intro = CKEditorField("About You")
 
 
 class ExperienceForm(FlaskForm):
@@ -24,7 +24,7 @@ class ExperienceForm(FlaskForm):
     position = StringField("Position")
     time = StringField("How long were you here for? eg. Apr. 2015 - Present")
     link = StringField("Company Link")
-    description = CKEditorField("")
+    description = CKEditorField("Experience Description")
 
 
 class EducationForm(FlaskForm):

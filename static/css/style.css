@@ -14,7 +14,7 @@
     --light-grey: #eeeeee;
     --light-grey-hover: #dedede;
     --white-grey: #f8f8f8;
-    --navy-blue: #0a192f;
+    --blue-grey: #536073;
     --opensans: 'Open Sans', sans-serif;
     --poppins: 'Poppins', sans-serif;
     --easing: cubic-bezier(0.645,0.045,0.355,1);
@@ -23,7 +23,7 @@
 .main-red-bg {background-color: var(--main-light-red);}
 .main-teal-bg {background-color: var(--main-teal);}
 .light-grey-bg {background-color: var(--light-grey);}
-.navy-blue-bg {background-color: var(--navy-blue);}
+.blue-grey-bg {background-color: var(--blue-grey);}
 .red-bg {background-color: var(--red);}
 .main-red {color: var(--main-light-red);}
 .white {color: var(--white);}
