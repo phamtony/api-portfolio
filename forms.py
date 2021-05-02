@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, FileField, TextAreaField
-from wtforms.validators import DataRequired, URL, Email
+from wtforms.validators import DataRequired, URL, Email, EqualTo
 from flask_ckeditor import CKEditorField
 import email_validator
 
@@ -52,7 +52,8 @@ class ProjectForm(FlaskForm):
 class RegisterForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired(), Email()])
-    password = PasswordField("Password", validators=[DataRequired()])
+    password = PasswordField("Set Password", validators=[DataRequired(), EqualTo("confirm", message="Passwords must match.")])
+    confirm = PasswordField("Confirm Password")
 
 
 class LoginForm(FlaskForm):
@@ -63,5 +64,6 @@ class LoginForm(FlaskForm):
 class AccountForm(FlaskForm):
     name = StringField("Name")
     email = StringField("Email")
-    password = PasswordField("Change Password")
+    password = PasswordField("Change Password", validators=[EqualTo("confirm", message="Passwords must match.")])
+    confirm = PasswordField("Confirm Password")
     api_key = StringField("API Key")
