@@ -1,6 +1,7 @@
 Backlog:
     -Clearer instructions on the site
     -Splash Page
+    -SEO
     -More Categories
     -Custom sections and categories
     -More versatile for all users
