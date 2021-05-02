@@ -23,17 +23,13 @@ def about():
         new_about = About(
             intro=form.intro.data,
             image=file.filename,
-            section_one=form.section_one.data,
-            skills_work=form.skills_work.data,
-            section_two=form.section_two.data,
-            skills_goto=form.skills_goto.data,
             general=current_user,
         )
         db.session.add(new_about)
         db.session.commit()
         return redirect(url_for("main_page.home")+"#About")
 
-    return render_template("form_page.html", form=form, title="About")
+    return render_template("form_page.html", form=form, title="About", ckEditor=True)
 
 
 @about_page.route("/edit-about", methods=["GET", "POST"])
@@ -44,10 +40,6 @@ def edit_about():
     edit_about = AboutForm(
         intro=about_info.intro,
         image=None,
-        section_one=about_info.section_one,
-        skills_work=about_info.skills_work,
-        section_two=about_info.section_two,
-        skills_goto=about_info.skills_goto,
     )
     if edit_about.validate_on_submit():
         file = request.files['image']
@@ -55,13 +47,9 @@ def edit_about():
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename))
             about_info.image = file.filename
         about_info.intro = edit_about.intro.data
-        about_info.section_one = edit_about.section_one.data
-        about_info.skills_work = edit_about.skills_work.data
-        about_info.section_two = edit_about.section_two.data
-        about_info.skills_goto = edit_about.skills_goto.data
         db.session.commit()
         return redirect(url_for("main_page.home")+"#About")
-    return render_template("form_page.html", form=edit_about, image=image, title="About")
+    return render_template("form_page.html", form=edit_about, image=image, title="About", ckEditor=True)
 
 
 @about_page.route("/delete-about")

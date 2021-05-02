@@ -16,11 +16,7 @@ class GeneralForm(FlaskForm):
 
 class AboutForm(FlaskForm):
     image = FileField("")
-    intro = TextAreaField("Intro")
-    section_one = TextAreaField("Section One")
-    skills_work = StringField("List skills, use ',' to separate.")
-    section_two = TextAreaField("Section Two")
-    skills_goto = StringField("List skills, use ',' to separate.")
+    intro = CKEditorField("")
 
 
 class ExperienceForm(FlaskForm):
@@ -45,10 +41,10 @@ class SkillsForm(FlaskForm):
 
 
 class ProjectForm(FlaskForm):
+    screenshot = FileField()
     name = StringField("Project Name")
     link = StringField("Project Link")
     github_link = StringField("Github Link")
-    screenshot = FileField()
     description = TextAreaField("Project Description")
     tech_list = StringField("List Of Tech")
 

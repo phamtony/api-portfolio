@@ -4,7 +4,7 @@
 
             <div class="column is-full">
                 <p class="has-text-weight-semibold">Uploaded Image:</p>
-                <figure class="image is-128x128">
+                <figure class="image min-max-width-300">
                     <img src="/static/images/{{ about_info.image }}" alt="">
                 </figure>
             </div>
@@ -12,46 +12,9 @@
             <div class="column is-full">
                 <p class="has-text-weight-semibold">Intro:</p>
                 <p>
-                    {{ about_info.intro }}
+                    {{ about_info.intro|safe }}
                 </p>
             </div>
-
-            <div class="column is-full">
-                <p class="has-text-weight-semibold">Section 1:</p>
-                <p>
-                    {{ about_info.section_one }}
-                </p>
-            </div>
-
-              <div class="column is-full">
-            <div class="columns">
-                <div class="column is-one-fourth">
-                    <p class="has-text-weight-semibold">Skills Work:</p>
-                </div>
-                <div class="column is-three-quarters">
-                    <p>{{ about_info.skills_work }}</p>
-                </div>
-            </div>
-        </div>
-
-            <div class="column is-full">
-                <p class="has-text-weight-semibold">Section 2:</p>
-                <p>
-                    {{ about_info.section_two }}
-                </p>
-            </div>
-
-                  <div class="column is-full">
-            <div class="columns">
-                <div class="column is-one-fourth">
-                    <p class="has-text-weight-semibold">Goto Skills:</p>
-                </div>
-                <div class="column is-three-quarters">
-                    <p>{{ about_info.skills_goto }}</p>
-                </div>
-            </div>
-        </div>
-
 
         </div>
     </div>
