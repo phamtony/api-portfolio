@@ -44,6 +44,12 @@ Set-up classes
 
 Blueprint APP
 
+Deployment:
+Heroku
+Procfile: Gunicorn setup
+SQLite to PostgreSQL
+
+
 Get required plugins, requirement.txt
 gunicorn==20.1.0 #Deployment with heroku
 certifi==2020.12.5
