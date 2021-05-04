@@ -75,7 +75,7 @@ def edit_about():
 
             try:
                 os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
-            except FileNotFoundError:
+            except:
                 pass
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
@@ -96,7 +96,7 @@ def delete_about():
 
     try:
         os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
-    except FileNotFoundError:
+    except:
         pass
 
     db.session.delete(about_info)
