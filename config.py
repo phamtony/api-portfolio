@@ -7,25 +7,22 @@ class Config(object):
 
     UPLOAD_FOLDER = './static/images/'
     SECRET_KEY = os.environ.get("SECRET_KEY")
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
+    SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE = True
-    SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
 
 
 class ProductionConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
+
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    # UPLOAD_FOLDER = ''
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
-
     SESSION_COOKIE_SECURE = False
 
-
-class TestingConfig(Config):
-    TESTING = True
-
-    SESSION_COOKIE_SECURE = False
+    SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
