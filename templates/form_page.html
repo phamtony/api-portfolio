@@ -11,6 +11,18 @@
                     <div class="content">
                         <h1>{{ title }} Info</h1>
 
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <article class="message is-danger">
+                                        <div class="message-body">
+                                            {{ message }}
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+
                         {% if title == "About" or title == "Project" %}
                             {% if image %}
                                 <p>Current Uploaded Image:</p>

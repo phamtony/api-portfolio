@@ -7,6 +7,8 @@ class Config(object):
 
     UPLOAD_FOLDER = './static/images/'
     SECRET_KEY = os.environ.get("SECRET_KEY")
+    ALLOWED_IMAGE_EXTENSIONS = ["PNG", "JPG", "JPEG", "GIF", "SVG"]
+
     SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
