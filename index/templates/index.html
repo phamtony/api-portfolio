@@ -86,7 +86,11 @@
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (window.confirm('Delete Info?')) {
-                    window.location = e.target.parentElement.href;
+                    if (e.target.nodeName === 'SPAN') {
+                        window.location = e.target.parentElement.href;
+                    } else {
+                        window.location = e.target.href;
+                    }
                 }
             });
         }

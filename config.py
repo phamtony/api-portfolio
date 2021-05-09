@@ -9,7 +9,7 @@ class Config(object):
     SECRET_KEY = os.environ.get("SECRET_KEY")
     ALLOWED_IMAGE_EXTENSIONS = ["PNG", "JPG", "JPEG", "GIF", "SVG"]
 
-    MAX_CONTENT_LENGTH = 4 * 1024 * 1024
+    MAX_CONTENT_LENGTH = 2 * 1024 * 1024
 
     SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
