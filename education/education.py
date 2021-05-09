@@ -27,7 +27,7 @@ def add_education():
     return render_template("form_page.html", form=form, title="Education")
 
 
-@education_page.route('/edit-education/<int:id>', methods=["GET", "POST"])
+@education_page.route("/edit-education/<int:id>", methods=["GET", "POST"])
 @login_required
 def edit_education(id):
     education = Education.query.get(id)
@@ -46,7 +46,7 @@ def edit_education(id):
     return render_template("form_page.html", form=edit_education, title="Education")
 
 
-@education_page.route('/delete-education/<int:id>', methods=["GET", "POST"])
+@education_page.route("/delete-education/<int:id>", methods=["GET", "POST"])
 @login_required
 def delete_education(id):
     education_info = Education.query.get(id)

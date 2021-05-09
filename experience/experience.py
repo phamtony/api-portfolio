@@ -29,7 +29,7 @@ def add_experience():
     return render_template("form_page.html", form=form, title="Experience", ckEditor=True)
 
 
-@experience_page.route('/edit-experience/<int:id>', methods=["GET", "POST"])
+@experience_page.route("/edit-experience/<int:id>", methods=["GET", "POST"])
 @login_required
 def edit_experience(id):
     experience = Experience.query.get(id)
@@ -52,7 +52,7 @@ def edit_experience(id):
     return render_template("form_page.html", form=edit_experience, title="Experience", ckEditor=True)
 
 
-@experience_page.route('/delete-experience/<int:id>')
+@experience_page.route("/delete-experience/<int:id>")
 @login_required
 def delete_experience(id):
     experience_info = Experience.query.get(id)

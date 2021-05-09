@@ -3,9 +3,8 @@ from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 import uuid
 import os
-import boto3
 
-from extensions import db
+from extensions import db, s3_session
 from portfolio_func import allowed_image, image_ext
 from models import About
 from forms import AboutForm
@@ -17,12 +16,10 @@ about_page = Blueprint("about_page", __name__)
 @about_page.route("/about", methods=["GET", "POST"])
 @login_required
 def about():
-    s3_client = boto3.resource('s3', aws_access_key_id=current_app.config["S3_KEY"],
-                     aws_secret_access_key=current_app.config["S3_SECRET"])
-
     form = AboutForm()
     if request.method == "POST" and form.validate_on_submit():
-        file = request.files['image']
+        s3_client = s3_session.resource("s3")
+        file = request.files["image"]
 
         if file:
 
@@ -35,7 +32,6 @@ def about():
                 return redirect(request.url)
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
-            # file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
             s3_client.Bucket(current_app.config["S3_BUCKET"]).put_object(Key=filename, Body=file, ACL="public-read")
 
         else:
@@ -66,7 +62,8 @@ def edit_about():
     )
 
     if edit_about.validate_on_submit():
-        file = request.files['image']
+        s3_client = s3_session.resource("s3")
+        file = request.files["image"]
 
         if file:
 
@@ -79,12 +76,12 @@ def edit_about():
                 return redirect(request.url)
 
             try:
-                os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
+                s3_client.Object(current_app.config["S3_BUCKET"], image).delete()
             except:
                 pass
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            s3_client.Bucket(current_app.config["S3_BUCKET"]).put_object(Key=filename, Body=file, ACL="public-read")
             about_info.image = filename
 
         about_info.intro = edit_about.intro.data
@@ -96,11 +93,12 @@ def edit_about():
 @about_page.route("/delete-about")
 @login_required
 def delete_about():
+    s3_client = s3_session.resource("s3")
     about_info = About.query.filter_by(general_id=current_user.id).first()
     image = about_info.image
 
     try:
-        os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
+        s3_client.Object(current_app.config["S3_BUCKET"], image).delete()
     except:
         pass
 

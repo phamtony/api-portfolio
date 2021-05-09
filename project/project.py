@@ -18,7 +18,7 @@ project_page = Blueprint("project_page", __name__)
 def add_project():
     form = ProjectForm()
     if request.method == "POST" and form.validate_on_submit():
-        file = request.files['screenshot']
+        file = request.files["screenshot"]
 
         if file:
 
@@ -31,7 +31,7 @@ def add_project():
                 return redirect(request.url)
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
 
         else:
             filename = None
@@ -66,7 +66,7 @@ def edit_project(id):
         tech_list=project_info.tech_list,
     )
     if edit_project.validate_on_submit():
-        file = request.files['screenshot']
+        file = request.files["screenshot"]
         if file:
 
             if file.filename == "":
