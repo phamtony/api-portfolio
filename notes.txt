@@ -51,6 +51,8 @@ SQLite to PostgreSQL
 
 
 Get required plugins, requirement.txt
+
+
 gunicorn==20.1.0 #Deployment with heroku
 certifi==2020.12.5
 chardet==4.0.0
@@ -73,3 +75,4 @@ Werkzeug==1.0.1 #Hash
 WTForms==2.3.3 #Forms
 email-validator==1.1.2 #Email validator in forms
 psycopg2-binary==2.8.6 #postgresql adapter (when deploying and migrating to postgresql)
+boto3==1.17.69 #aws s3 bucket

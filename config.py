@@ -11,6 +11,12 @@ class Config(object):
 
     MAX_CONTENT_LENGTH = 2 * 1024 * 1024
 
+    S3_BUCKET = os.environ.get("S3_BUCKET_NAME")
+    S3_KEY = os.environ.get("S3_ACCESS_KEY")
+    S3_SECRET = os.environ.get("S3_SECRET_ACCESS_KEY")
+    S3_REGION = os.environ.get("S3_REGION")
+    S3_IMAGE_PATH = os.environ.get("S3_IMAGE_PATH")
+
     SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

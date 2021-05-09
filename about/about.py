@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 import uuid
 import os
+import boto3
 
 from extensions import db
 from portfolio_func import allowed_image, image_ext
@@ -16,6 +17,9 @@ about_page = Blueprint("about_page", __name__)
 @about_page.route("/about", methods=["GET", "POST"])
 @login_required
 def about():
+    s3_client = boto3.resource('s3', aws_access_key_id=current_app.config["S3_KEY"],
+                     aws_secret_access_key=current_app.config["S3_SECRET"])
+
     form = AboutForm()
     if request.method == "POST" and form.validate_on_submit():
         file = request.files['image']
@@ -31,7 +35,8 @@ def about():
                 return redirect(request.url)
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            # file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            s3_client.Bucket(current_app.config["S3_BUCKET"]).put_object(Key=filename, Body=file, ACL="public-read")
 
         else:
             filename = None

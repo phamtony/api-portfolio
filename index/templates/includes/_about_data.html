@@ -5,7 +5,7 @@
             <div class="column is-full">
                 <p class="has-text-weight-semibold">Uploaded Image:</p>
                 <figure class="image min-max-width-300">
-                    <img src="/static/images/{{ about_info.image }}" alt="">
+                    <img src="{{ config.S3_IMAGE_PATH }}/{{ about_info.image }}" alt="">
                 </figure>
             </div>
 
