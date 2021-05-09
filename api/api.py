@@ -6,7 +6,7 @@ from models import General, About, Experience, Education, Skills, Project
 json_return = Blueprint("json_return", __name__)
 
 
-@json_return.route('/json')
+@json_return.route("/json")
 def api():
     api = request.args.get("api")
     id = General.query.filter_by(api_key=api).first().id

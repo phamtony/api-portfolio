@@ -86,7 +86,7 @@
             btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (window.confirm('Delete Info?')) {
-                    window.location = e.target.parentElement.href;
+                    window.location = e.target.closest('a').href;
                 }
             });
         }

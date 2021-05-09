@@ -27,7 +27,7 @@
                             {% if image %}
                                 <p>Current Uploaded Image:</p>
                                 <div>
-                                    <img class="edit-form-img" src="/static/images/{{ image }}" alt="">
+                                    <img class="edit-form-img" src="{{ config.S3_IMAGE_PATH }}/{{ image }}" alt="">
                                 </div>
                                 <p class="help">Upload a different image to replace the current one.</p>
                             {% endif %}

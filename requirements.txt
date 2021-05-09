@@ -20,3 +20,4 @@ Werkzeug==1.0.1
 WTForms==2.3.3
 email-validator==1.1.2
 psycopg2-binary==2.8.6
+boto3==1.17.68
