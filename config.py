@@ -5,7 +5,6 @@ class Config(object):
     DEBUG = False
     TESTING = False
 
-    UPLOAD_FOLDER = "./static/images/"
     SECRET_KEY = os.environ.get("SECRET_KEY")
     ALLOWED_IMAGE_EXTENSIONS = ["PNG", "JPG", "JPEG", "GIF", "SVG"]
 

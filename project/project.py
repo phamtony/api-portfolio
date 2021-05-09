@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 import uuid
 import os
 
-from extensions import db
+from extensions import db, s3_session
 from portfolio_func import allowed_image, image_ext
 from models import Project
 from forms import ProjectForm
@@ -18,6 +18,7 @@ project_page = Blueprint("project_page", __name__)
 def add_project():
     form = ProjectForm()
     if request.method == "POST" and form.validate_on_submit():
+        s3_client = s3_session.resource("s3")
         file = request.files["screenshot"]
 
         if file:
@@ -31,7 +32,7 @@ def add_project():
                 return redirect(request.url)
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
-            file.save(os.path.join(current_app.config["UPLOAD_FOLDER"], filename))
+            s3_client.Bucket(current_app.config["S3_BUCKET"]).put_object(Key=filename, Body=file, ACL="public-read")
 
         else:
             filename = None
@@ -66,6 +67,7 @@ def edit_project(id):
         tech_list=project_info.tech_list,
     )
     if edit_project.validate_on_submit():
+        s3_client = s3_session.resource("s3")
         file = request.files["screenshot"]
         if file:
 
@@ -78,12 +80,12 @@ def edit_project(id):
                 return redirect(request.url)
 
             try:
-                os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
+                s3_client.Object(current_app.config["S3_BUCKET"], image).delete()
             except:
                 pass
 
             filename = secure_filename(str(uuid.uuid4())) + f".{image_ext(file.filename)}"
-            file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+            s3_client.Bucket(current_app.config["S3_BUCKET"]).put_object(Key=filename, Body=file, ACL="public-read")
             project_info.screenshot = filename
 
         project_info.name = edit_project.name.data
@@ -100,11 +102,12 @@ def edit_project(id):
 @project_page.route("/delete-project/<int:id>")
 @login_required
 def delete_project(id):
+    s3_client = s3_session.resource("s3")
     project_info = Project.query.get(id)
     image = project_info.screenshot
 
     try:
-        os.remove(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
+        s3_client.Object(current_app.config["S3_BUCKET"], image).delete()
     except:
         pass
 

@@ -2,7 +2,6 @@ from flask import Blueprint, request, redirect, url_for, render_template, curren
 from flask_login import login_required, current_user
 from werkzeug.utils import secure_filename
 import uuid
-import os
 
 from extensions import db, s3_session
 from portfolio_func import allowed_image, image_ext

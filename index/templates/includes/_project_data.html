@@ -21,7 +21,7 @@
                     <td>{{ project.github_link }}</td>
                     <td>
                         <figure class="image is-128x128">
-                            <img src="/static/images/{{ project.screenshot }}" alt="">
+                            <img src="{{ config.S3_IMAGE_PATH }}/{{ project.screenshot }}" alt="">
                         </figure>
                     </td>
                     <td class="min-max-width-300">{{ project.description }}</td>
