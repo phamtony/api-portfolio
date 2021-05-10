@@ -5,8 +5,11 @@ Backlog:
     -More Categories
     -Custom sections and categories
     -More versatile for all users
-    -Tech Docs
-    -Github Readme Docs
+    -Tech Docs/Github readme docs
+    -SUPER ADMIN
+    -Better error handling
+    -Image Lightbox
+    -Email change, make column for old emails
     -Documentation/Instructions to use the site, and for API
     -Resume Generator
     -Connect to other APIs like IFFFT or when you update, it updates this profile
