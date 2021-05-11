@@ -97,6 +97,10 @@ a.navbar-item:hover {
 .label {
     font-weight: 500;
 }
+.order-field input {
+    max-width: 45px;
+    text-align: center;
+}
 
 .button.main-red-bg:hover {
     background-color: var(--main-light-red-hover);

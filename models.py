@@ -65,6 +65,7 @@ class Experience(db.Model):
     time = db.Column(db.String(100))
     link = db.Column(db.String(250))
     description = db.Column(db.String(1000))
+    order_exp = db.Column(db.Integer)
 
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
     general = relationship("General", back_populates="experience")
@@ -89,6 +90,7 @@ class Education(db.Model):
     school = db.Column(db.String(150))
     time = db.Column(db.String(100))
     degree = db.Column(db.String(250))
+    order_ed = db.Column(db.Integer)
 
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
     general = relationship("General", back_populates="education")
@@ -138,6 +140,7 @@ class Project(db.Model):
     screenshot = db.Column(db.String(250))
     description = db.Column(db.String(500))
     tech_list = db.Column(db.String(250))
+    order_project = db.Column(db.Integer)
 
     # Create Foreign Key, "general.id" the users refers to the tablename of General.
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))

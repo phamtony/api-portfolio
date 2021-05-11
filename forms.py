@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, FileField, TextAreaField
-from wtforms.validators import DataRequired, URL, Email, EqualTo
+from wtforms import StringField, PasswordField, FileField, TextAreaField, HiddenField
+from wtforms.validators import DataRequired, Email, EqualTo
 from flask_ckeditor import CKEditorField
 import email_validator
 
@@ -25,6 +25,7 @@ class ExperienceForm(FlaskForm):
     time = StringField("How long were you here for? eg. Apr. 2015 - Present")
     link = StringField("Company Link")
     description = CKEditorField("Experience Description")
+    order_exp = HiddenField("")
 
 
 class EducationForm(FlaskForm):

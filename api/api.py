@@ -13,7 +13,7 @@ def api():
 
     skill_query = Skills.query.filter_by(general_id=id).first()
     about_query = About.query.filter_by(general_id=id).first()
-    experience_query = Experience.query.filter_by(general_id=id)
+    experience_query = Experience.query.filter_by(general_id=id).order_by("order_exp")
     education_query = Education.query.filter_by(general_id=id)
     project_query = Project.query.filter_by(general_id=id)
 

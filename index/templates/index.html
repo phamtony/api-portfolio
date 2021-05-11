@@ -83,13 +83,50 @@
         const delete_btns = document.querySelectorAll('.btn-delete');
 
         for (let btn of delete_btns) {
-            btn.addEventListener('click', function (e) {
+            btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (window.confirm('Delete Info?')) {
                     window.location = e.target.closest('a').href;
                 }
             });
         }
+
+
+        const save_order_btns = document.querySelectorAll('.save-order-btn')
+
+        for (let orderBtn of save_order_btns) {
+            orderBtn.addEventListener('click', (e) => {
+                url = '/edit-experience-order?';
+                e.preventDefault();
+                const containerInput = e.target.closest('.content').querySelectorAll('.order-input');
+
+                params = '';
+                for (let i = 0; i < containerInput.length; i++) {
+                    params += '&order=' + containerInput[i].value;
+                }
+
+                window.location = window.location.origin + url + params
+            });
+        }
+
+
+        const inputs = document.querySelectorAll('.order-input')
+
+        for (let orderInput of inputs) {
+            orderInput.addEventListener('change', (e) => {
+                e.preventDefault();
+                const containerInput = e.target.closest('.table').querySelectorAll('.order-input');
+
+                if (e.target.value > containerInput.length) {
+                    e.target.value = containerInput.length;
+                }
+            });
+        }
+
+{#        var request = new XMLHttpRequest();#}
+{#request.open('POST', '/my/url', true);#}
+{#request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');#}
+{#request.send(data);#}
 
         //image lightbox MAKE FUNCTION or PLUGIN
     </script>
