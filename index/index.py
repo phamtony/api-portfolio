@@ -15,5 +15,5 @@ def home():
     experiences = Experience.query.filter_by(general_id=current_user.id).order_by("order_exp")
     education = Education.query.filter_by(general_id=current_user.id).order_by("order_ed")
     skills = Skills.query.filter_by(general_id=current_user.id).first()
-    projects = Project.query.filter_by(general_id=current_user.id)
+    projects = Project.query.filter_by(general_id=current_user.id).order_by("order_project")
     return render_template("index.html", general_info=general, about_info=about, experiences=experiences, education_list=education, skills=skills, projects=projects)

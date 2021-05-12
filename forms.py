@@ -49,6 +49,7 @@ class ProjectForm(FlaskForm):
     github_link = StringField("Github Link")
     description = TextAreaField("Project Description")
     tech_list = StringField("List Of Tech")
+    order_project = HiddenField("")
 
 
 class RegisterForm(FlaskForm):

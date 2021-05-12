@@ -15,7 +15,7 @@ def api():
     about_query = About.query.filter_by(general_id=id).first()
     experience_query = Experience.query.filter_by(general_id=id).order_by("order_exp")
     education_query = Education.query.filter_by(general_id=id).order_by("order_ed")
-    project_query = Project.query.filter_by(general_id=id)
+    project_query = Project.query.filter_by(general_id=id).order_by("order_project")
 
     try:
         general = General.query.get(id).serialized
