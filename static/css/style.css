@@ -126,3 +126,8 @@ a.navbar-item:hover {
     width: 150px;
     vertical-align: middle;
 }
+
+.description-td {
+    max-height: 130px;
+    overflow: auto;
+}

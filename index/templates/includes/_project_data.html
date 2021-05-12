@@ -30,7 +30,11 @@
                             <img src="{{ config.S3_IMAGE_PATH }}/{{ project.screenshot }}" alt="">
                         </figure>
                     </td>
-                    <td class="min-max-width-300">{{ project.description }}</td>
+                    <td class="min-max-width-300">
+                        <div class="description-td">
+                            {{ project.description }}
+                        </div>
+                    </td>
                     <td>{{ project.tech_list }}</td>
                     <td>
                         <div class="field is-grouped">
