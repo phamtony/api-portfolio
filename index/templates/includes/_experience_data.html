@@ -57,9 +57,9 @@
 {% endif %}
 
 <div class="field is-grouped">
-    {% if experiences %}
+    {% if experiences.count() > 0 %}
         <p class="control">
-            <a class="button light-grey-bg save-order-btn" href="#">Save Order</a>
+            <a class="button light-grey-bg save-order-btn" href="#" id="experience_order">Save Order</a>
         </p>
     {% endif %}
     <p class="control">

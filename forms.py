@@ -32,6 +32,7 @@ class EducationForm(FlaskForm):
     school = StringField("School Name")
     time = StringField("Duration")
     degree = StringField("Degree")
+    order_ed = HiddenField("")
 
 
 class SkillsForm(FlaskForm):

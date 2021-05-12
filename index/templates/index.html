@@ -96,7 +96,7 @@
 
         for (let orderBtn of save_order_btns) {
             orderBtn.addEventListener('click', (e) => {
-                url = '/edit-experience-order?';
+                url = '/edit-' + e.target.id.split('_')[0] + '-order?';
                 e.preventDefault();
                 const containerInput = e.target.closest('.content').querySelectorAll('.order-input');
 
@@ -122,11 +122,6 @@
                 }
             });
         }
-
-{#        var request = new XMLHttpRequest();#}
-{#request.open('POST', '/my/url', true);#}
-{#request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');#}
-{#request.send(data);#}
 
         //image lightbox MAKE FUNCTION or PLUGIN
     </script>

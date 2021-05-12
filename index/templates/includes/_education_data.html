@@ -3,6 +3,7 @@
         <table class="table is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
+                <th>Order</th>
                 <th>School Name</th>
                 <th>Duration</th>
                 <th>Degree</th>
@@ -13,6 +14,11 @@
             <tbody>
             {% for education in education_list %}
                 <tr>
+                    <td>
+                        <div class="field order-field">
+                            <input type="text" name="order" class="input order-input" id="education_{{ education.id }}" maxlength="2" value="{{ education.order_ed }}">
+                        </div>
+                    </td>
                     <td>
                         {{ education.school }}
                     </td>
@@ -41,7 +47,12 @@
     </div>
 {% endif %}
 
-<div class="field">
+<div class="field is-grouped">
+    {% if education_list.count() > 0 %}
+        <p class="control">
+            <a class="button light-grey-bg save-order-btn" href="#" id="education_order">Save Order</a>
+        </p>
+    {% endif %}
     <p class="control">
         <a class="button main-teal-bg white" href="{{ url_for('education_page.add_education') }}"><span class="icon"><i
                 class="material-icons">school</i></span><span>Add Education</span></a>
