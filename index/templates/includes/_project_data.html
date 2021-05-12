@@ -3,6 +3,7 @@
         <table class="table is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
+                <th>Order</th>
                 <th>Project Name</th>
                 <th>Project Link</th>
                 <th>Github Link</th>
@@ -16,6 +17,11 @@
             <tbody>
             {% for project in projects %}
                 <tr>
+                    <td>
+                        <div class="field order-field">
+                            <input type="text" name="order" class="input order-input" id="project_{{ project.id }}" maxlength="2" value="{{ project.order_project }}">
+                        </div>
+                    </td>
                     <td>{{ project.name }}</td>
                     <td>{{ project.link }}</td>
                     <td>{{ project.github_link }}</td>
@@ -45,7 +51,12 @@
     </div>
 {% endif %}
 
-<div class="field">
+<div class="field is-grouped">
+    {% if projects.count() > 0 %}
+        <p class="control">
+            <a class="button light-grey-bg save-order-btn" href="#" id="project_order">Save Order</a>
+        </p>
+    {% endif %}
     <p class="control">
         <a class="button main-teal-bg white" href="{{ url_for('project_page.add_project') }}"><span
                 class="icon"><i class="material-icons">view_compact</i></span><span>Add Project</span></a>

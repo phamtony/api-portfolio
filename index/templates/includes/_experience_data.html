@@ -3,6 +3,7 @@
         <table class="table is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
+                <th>Order</th>
                 <th>Company Name</th>
                 <th>Position</th>
                 <th>Time</th>
@@ -15,6 +16,11 @@
             <tbody>
             {% for experience in experiences %}
                 <tr>
+                    <td>
+                        <div class="field order-field">
+                            <input type="text" name="order" class="input order-input" id="experience_{{ experience.id }}" maxlength="2" value="{{ experience.order_exp }}">
+                        </div>
+                    </td>
                     <td class="white-space-nowrap">
                         {{ experience.name }}
                     </td>
@@ -50,7 +56,12 @@
     </div>
 {% endif %}
 
-<div class="field">
+<div class="field is-grouped">
+    {% if experiences.count() > 0 %}
+        <p class="control">
+            <a class="button light-grey-bg save-order-btn" href="#" id="experience_order">Save Order</a>
+        </p>
+    {% endif %}
     <p class="control">
         <a class="button main-teal-bg white" href="{{ url_for('experience_page.add_experience') }}"><span
                 class="icon"><i class="material-icons">work</i></span><span>Add Experience</span></a>
