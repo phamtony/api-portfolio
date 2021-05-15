@@ -13,7 +13,7 @@ class General(db.Model, UserMixin):
     email = db.Column(db.String(100))
     github = db.Column(db.String(100))
     linkedin = db.Column(db.String(100))
-    user_intro = db.Column(db.String(500))
+    user_intro = db.Column(db.String(3000))
     api_key = db.Column(db.String(100))
 
     experience = relationship("Experience", back_populates="general")
@@ -40,7 +40,7 @@ class General(db.Model, UserMixin):
 class About(db.Model):
     __tablename__ = "about"
     id = db.Column(db.Integer, primary_key=True)
-    intro = db.Column(db.String(1000))
+    intro = db.Column(db.String(3000))
     image = db.Column(db.String(250))
 
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
@@ -64,7 +64,7 @@ class Experience(db.Model):
     position = db.Column(db.String(100))
     time = db.Column(db.String(100))
     link = db.Column(db.String(250))
-    description = db.Column(db.String(1000))
+    description = db.Column(db.String(2500))
     order_exp = db.Column(db.Integer)
 
     general_id = db.Column(db.Integer, db.ForeignKey("general.id"))
@@ -138,7 +138,7 @@ class Project(db.Model):
     link = db.Column(db.String(250))
     github_link = db.Column(db.String(250))
     screenshot = db.Column(db.String(250))
-    description = db.Column(db.String(500))
+    description = db.Column(db.String(1500))
     tech_list = db.Column(db.String(250))
     order_project = db.Column(db.Integer)
 
