@@ -22,3 +22,4 @@ email-validator==1.1.2
 psycopg2-binary==2.8.6
 boto3==1.17.68
 Flask-Cors==3.0.10
+Flask-Migrate==3.0.0
