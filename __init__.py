@@ -33,11 +33,12 @@ def create_app():
     app.register_blueprint(skills_page)
     app.register_blueprint(project_page)
 
-    from extensions import db, login_manager, ckeditor
+    from extensions import db, login_manager, ckeditor, cors
 
     db.init_app(app)
     login_manager.init_app(app)
     ckeditor.init_app(app)
+    cors.init_app(app)
 
     @login_manager.user_loader
     def load_user(user_id):
