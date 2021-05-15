@@ -1,15 +1,15 @@
 from flask import Flask
 
 from api.api import json_return
-from index.index import main_page
-from register_login.register_login import register_login_page
-from account.account import account_page
-from general.general import general_page
-from about.about import about_page
-from experience.experience import experience_page
-from education.education import education_page
-from skills.skills import skills_page
-from project.project import project_page
+from app.views.index.index import main_page
+from app.views.register_login.register_login import register_login_page
+from app.views.account.account import account_page
+from app.views.general.general import general_page
+from app.views.about.about import about_page
+from app.views.experience.experience import experience_page
+from app.views.education.education import education_page
+from app.views.skills.skills import skills_page
+from app.views.project.project import project_page
 
 from models import General
 
