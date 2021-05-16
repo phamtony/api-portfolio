@@ -71,11 +71,12 @@ class Experience(db.Model):
     general = relationship("General", back_populates="experience")
 
     def __repr__(self):
-        return "<Experience(name='%s', position='%s', time='%s', link='%s', description='%s')>" % (self.name, self.position, self.time, self.link, self.description)
+        return "<Experience(id='%s', name='%s', position='%s', time='%s', link='%s', description='%s')>" % (self.id, self.name, self.position, self.time, self.link, self.description)
 
     @property
     def serialized(self):
         return {
+            "id": self.id,
             "name": self.name,
             "position": self.position,
             "time": self.time,
@@ -96,11 +97,12 @@ class Education(db.Model):
     general = relationship("General", back_populates="education")
 
     def __repr__(self):
-        return "<Education(school='%s', time='%s', degree='%s')>" % (self.school, self.time, self.degree)
+        return "<Education(id='%s', school='%s', time='%s', degree='%s')>" % (self.id, self.school, self.time, self.degree)
 
     @property
     def serialized(self):
         return {
+            "id": self.id,
             "school": self.school,
             "time": self.time,
             "degree": self.degree,
@@ -148,11 +150,12 @@ class Project(db.Model):
     general = relationship("General", back_populates="project")
 
     def __repr__(self):
-        return "<Project(name='%s', link='%s', github_link='%s', screenshot='%s', description='%s', tech_list='%s')>" % (self.name, self.link, self.github_link, self.screenshot, self.description, self.tech_list)
+        return "<Project(id='%s', name='%s', link='%s', github_link='%s', screenshot='%s', description='%s', tech_list='%s')>" % (self.id, self.name, self.link, self.github_link, self.screenshot, self.description, self.tech_list)
 
     @property
     def serialized(self):
         return {
+            "id": self.id,
             "name": self.name,
             "link": self.link,
             "github_link": self.github_link,
