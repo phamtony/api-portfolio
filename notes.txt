@@ -13,6 +13,7 @@ Backlog:
     -Documentation/Instructions to use the site, and for API
     -Resume Generator
     -Connect to other APIs like IFFFT or when you update, it updates this profile
+    -Caching
 
 Authentication
     -Model for the user or use General
