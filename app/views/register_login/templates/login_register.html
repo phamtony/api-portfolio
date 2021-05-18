@@ -17,7 +17,7 @@
                                 {% for message in messages %}
                                     <article class="message is-danger">
                                         <div class="message-body">
-                                            {{ message }}
+                                            {{ message|safe }}
                                         </div>
                                     </article>
                                 {% endfor %}
