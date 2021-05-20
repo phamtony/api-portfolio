@@ -127,6 +127,11 @@ a.navbar-item:hover {
     vertical-align: middle;
 }
 
+#user_intro.textarea:not([rows]),
+#intro.textarea:not([rows]) {
+    min-height: 20em;
+}
+
 .description-td {
     max-height: 130px;
     overflow: auto;

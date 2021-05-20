@@ -26,7 +26,7 @@ def general():
         db.session.commit()
         return redirect(url_for("main_page.home")+"#General")
 
-    return render_template("form_page.html", form=form, title="General", ckEditor=True)
+    return render_template("form_page.html", form=form, title="General")
 
 
 @general_page.route("/edit-general", methods=["GET", "POST"])
@@ -50,4 +50,4 @@ def edit_general():
         general_info.user_intro = edit_general.user_intro.data
         db.session.commit()
         return redirect(url_for("main_page.home")+"#General")
-    return render_template("form_page.html", form=edit_general, title="General", ckEditor=True)
+    return render_template("form_page.html", form=edit_general, title="General")

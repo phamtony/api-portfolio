@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-from flask_ckeditor import CKEditor
 import boto3
 import boto3.session
 from flask_cors import CORS
@@ -9,7 +8,6 @@ from flask_cors import CORS
 db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
-ckeditor = CKEditor()
 s3_session = boto3.session.Session()
 cors = CORS()
 

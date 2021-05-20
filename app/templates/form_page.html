@@ -34,10 +34,6 @@
                         {% endif %}
                     </div>
 
-                    {% if ckEditor %}
-                        {{ ckeditor.load() }}
-                    {% endif %}
-
                     <form action method="POST" enctype="multipart/form-data">
                         {{ form.csrf_token }}
 

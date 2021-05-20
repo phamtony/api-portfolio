@@ -63,7 +63,6 @@ chardet==4.0.0
 click==7.1.2
 dominate==2.6.0
 Flask==1.1.2 #framework
-Flask-CKEditor==0.4.4.1 #for forms, text editor
 Flask-Login==0.5.0 #user login
 Flask-SQLAlchemy==2.5.1 #ORM
 Flask-WTF==0.14.3 #Forms

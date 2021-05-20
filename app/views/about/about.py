@@ -46,7 +46,7 @@ def about():
         db.session.commit()
         return redirect(url_for("main_page.home")+"#About")
 
-    return render_template("form_page.html", form=form, title="About", ckEditor=True)
+    return render_template("form_page.html", form=form, title="About")
 
 
 @about_page.route("/edit-about", methods=["GET", "POST"])
@@ -86,7 +86,7 @@ def edit_about():
         about_info.intro = edit_about.intro.data
         db.session.commit()
         return redirect(url_for("main_page.home")+"#About")
-    return render_template("form_page.html", form=edit_about, image=image, title="About", ckEditor=True)
+    return render_template("form_page.html", form=edit_about, image=image, title="About")
 
 
 @about_page.route("/delete-about")
