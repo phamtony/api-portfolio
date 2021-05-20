@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, FileField, TextAreaField, HiddenField
 from wtforms.validators import DataRequired, Email, EqualTo
-from flask_ckeditor import CKEditorField
 import email_validator
 
 
@@ -11,12 +10,12 @@ class GeneralForm(FlaskForm):
     email = StringField("Email", validators=[Email()])
     github = StringField("Github")
     linkedin = StringField("Linkedin")
-    user_intro = CKEditorField("Intro")
+    user_intro = TextAreaField("Intro", render_kw={"placeholder": "HTML markup or plain text"})
 
 
 class AboutForm(FlaskForm):
     image = FileField("")
-    intro = CKEditorField("About You")
+    intro = TextAreaField("About You", render_kw={"placeholder": "HTML markup or plain text"})
 
 
 class ExperienceForm(FlaskForm):
@@ -24,7 +23,7 @@ class ExperienceForm(FlaskForm):
     position = StringField("Position")
     time = StringField("How long were you here for? eg. Apr. 2015 - Present")
     link = StringField("Company Link")
-    description = CKEditorField("Experience Description")
+    description = TextAreaField("Experience Description")
     order_exp = HiddenField("")
 
 
