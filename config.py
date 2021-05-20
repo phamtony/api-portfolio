@@ -14,15 +14,13 @@ class Config(object):
     S3_REGION = os.environ.get("S3_REGION")
     S3_IMAGE_PATH = os.environ.get("S3_IMAGE_PATH")
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", "sqlite:///portfolio.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE = True
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").replace("://", "ql://", 1)
-
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
 
@@ -30,5 +28,3 @@ class ProductionConfig(Config):
 class DevelopmentConfig(Config):
     DEBUG = True
     SESSION_COOKIE_SECURE = False
-
-    SQLALCHEMY_DATABASE_URI = "sqlite:///portfolio.db"
