@@ -80,22 +80,19 @@
 {% block scripts %}
     {{ super() }}
     <script>
-        const delete_btns = document.querySelectorAll('.btn-delete');
-
-        for (let btn of delete_btns) {
-            btn.addEventListener('click', (e) => {
+        const $delete_btns = document.querySelectorAll('.btn-delete');
+        $delete_btns.forEach(el => {
+            el.addEventListener('click', (e) => {
                 e.preventDefault();
                 if (window.confirm('Delete Info?')) {
                     window.location = e.target.closest('a').href;
                 }
             });
-        }
+        });
 
-
-        const save_order_btns = document.querySelectorAll('.save-order-btn')
-
-        for (let orderBtn of save_order_btns) {
-            orderBtn.addEventListener('click', (e) => {
+        const $save_order_btns = document.querySelectorAll('.save-order-btn')
+        $save_order_btns.forEach(el => {
+            el.addEventListener('click', (e) => {
                 url = '/edit-' + e.target.id.split('_')[0] + '-order?';
                 e.preventDefault();
                 const containerInput = e.target.closest('.content').querySelectorAll('.order-input');
@@ -107,13 +104,11 @@
 
                 window.location = window.location.origin + url + params
             });
-        }
+        });
 
-
-        const inputs = document.querySelectorAll('.order-input')
-
-        for (let orderInput of inputs) {
-            orderInput.addEventListener('change', (e) => {
+        const $inputs = document.querySelectorAll('.order-input')
+        $inputs.forEach(el => {
+             el.addEventListener('change', (e) => {
                 e.preventDefault();
                 const containerInput = e.target.closest('.table').querySelectorAll('.order-input');
 
@@ -121,8 +116,6 @@
                     e.target.value = containerInput.length;
                 }
             });
-        }
-
-        //image lightbox MAKE FUNCTION or PLUGIN
+        });
     </script>
 {% endblock %}
