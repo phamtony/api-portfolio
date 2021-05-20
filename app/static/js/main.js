@@ -1,4 +1,4 @@
-function generateAPI(length) {
+const generateAPI = (length) => {
     let result = [];
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;

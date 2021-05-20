@@ -64,14 +64,13 @@
     {% if title == "About" or title == "Project" %}
         <script>
             const fileInput = document.querySelector('.file-input-image');
+            
             fileInput.onchange = () => {
                 if (fileInput.files.length > 0) {
                     const fileName = document.querySelector('.file-name');
                     fileName.textContent = fileInput.files[0].name;
                 }
             }
-
-            //image lightbox MAKE FUNCTION or PLUGIN
         </script>
     {% endif %}
 {% endblock %}
