@@ -14,7 +14,7 @@ class Config(object):
     S3_REGION = os.environ.get("S3_REGION")
     S3_IMAGE_PATH = os.environ.get("S3_IMAGE_PATH")
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", "sqlite:///portfolio.db")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SESSION_COOKIE_SECURE = True
