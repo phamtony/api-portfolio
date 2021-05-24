@@ -1,9 +1,11 @@
 # Portfolio API
 ## Overview
-This is an admin, that allows you to populate your personal/career information. The admin will give you an API key (after generating and saving it) that will allow you to access to your JSON of your personal/career information.
+A simply headless CMS, that allows you to populate your personal/career information. The headless CMS provides a public API key (after generating and saving it) that will grant you access the information you populated via RestAPI.
 
-You can make your custom portfolio anyway you want. 
+With the public API, you can make your custom portfolio anyway you want. 
 
 https://portfolio-api.com
 
-*Will insert more information about this a little later. Thank you.*
+Here's my online porfolio/resume using portfolio-api: <a href="https://tonypham.dev" rel="noopener noreferrer" target="_blank">tonypham.dev</a>
+
+*Will provide more information about this at a later time. Thank you.*
