@@ -9,6 +9,8 @@ https://portfolio-api.com
 
 Here's my personal online porfolio using portfolio-api: <a href="https://tonypham.dev" rel="noopener noreferrer" target="_blank">tonypham.dev</a>
 
+*Please do not provide any sensitive information as this is a personal project with very little security emphasis.
+
 ## Usage
 You can make an account or you can test it out with the dummy credentials provided on the software.
 
