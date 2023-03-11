@@ -12,9 +12,12 @@ from app.views.skills.skills import skills_page
 from app.views.project.project import project_page
 
 from models import General
+from dotenv import load_dotenv
 
 
 def create_app():
+    load_dotenv()
+
     app = Flask(__name__)
 
     if app.config["ENV"] == "development":

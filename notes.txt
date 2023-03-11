@@ -49,12 +49,29 @@ Set-up classes
 
 Blueprint APP
 
+
+Changed VirtualEnv to VENV (thirdparty => python standard)
+We use dotenv to load up .env files
+
+.ENV credentials here:
+FLASK_ENV=development
+-- Any key
+SECRET_KEY=""
+-- Get it from the production service
+S3_BUCKET_NAME=""
+S3_REGION=""
+S3_IMAGE_PATH=""
+
+
+
+# TODO: EDIT THIS
 Deployment:
 Heroku
 Procfile: Gunicorn setup
 SQLite to PostgreSQL
 
 
+# TODO: remmber to edit this, use freeze again
 Get required plugins, requirement.txt
 
 
