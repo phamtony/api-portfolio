@@ -57,6 +57,7 @@ We use dotenv to load up .env files
 FLASK_ENV=development
 -- Any key
 SECRET_KEY=""
+DATABASE_URL="Dummyfile"
 -- Get it from the production service
 S3_BUCKET_NAME=""
 S3_REGION=""
