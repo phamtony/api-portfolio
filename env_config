@@ -1,0 +1,6 @@
+FLASK_ENV=development
+DATABASE_URL="Dummyfile"
+SECRET_KEY="203840238en4hakdfhafh98efae8*FS*OFUF8uo8euo8U#R*j"
+S3_BUCKET_NAME="portfolio--api"
+S3_REGION="s3-us-west-1"
+S3_IMAGE_PATH="https://portfolio--api.s3-us-west-1.amazonaws.com"
