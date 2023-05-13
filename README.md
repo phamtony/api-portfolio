@@ -14,6 +14,29 @@ Here's my personal online porfolio using portfolio-api: <a href="https://tonypha
 ## Usage
 You can make an account or you can test it out with the dummy credentials provided on the software.
 
+- Clone the project
+- make virtual env for the cloned project and activate the virtual env.
+```angular2html
+python -m venv env
+source env/bin/activate
+```
+- .env file setup. Make a new file ".env" and copy values from "env_config"
+- install required packages
+```angular2html
+pip install -r requirements.txt
+```
+
+#### *Disclaimer
+
+- when running "pip install -r requirements.txt", an error may occur trying to install "psycopg2-binary". If that happens, comment the package from requirements.txt and install it as a standalone.
+```angular2html
+pip install psycopg2-binary
+```
+and then run again:
+```angular2html
+pip install -r requirements.txt
+```
+
 ## Contribution
 1. Open a new issue to start a discussion around your feature or if a bug is discovered.
 
