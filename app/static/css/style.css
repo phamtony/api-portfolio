@@ -4,28 +4,33 @@
 :root {
     --white: #fff;
     --black: #000;
-    --main-light-red: #e57373;
-    --main-light-red-hover: #dc5555;
-    --main-teal: #38bbb0;
-    --main-teal-hover: #317f7d;
+    --main-color: #1b2e35;
+    --main-color-hover: #314c5b;
+    --main-teal: #7eb3c7;
+    --main-teal-hover: #6797a6;
+    --gun-metal: #637b84;
+    --gun-metal-hover: #53636b;
     --red: #c62828;
     --red-hover: #9c2b2b;
     --green: #2e7d32;
+    --off-yellow: #dcd3b5;
     --light-grey: #eeeeee;
     --light-grey-hover: #dedede;
     --white-grey: #f8f8f8;
     --blue-grey: #536073;
     --opensans: 'Open Sans', sans-serif;
     --poppins: 'Poppins', sans-serif;
+    --worksans: 'Work Sans', sans-serif;
     --easing: cubic-bezier(0.645,0.045,0.355,1);
     --transition: all 0.25s cubic-bezier(0.645,0.045,0.355,1);
 }
-.main-red-bg {background-color: var(--main-light-red);}
+.main-color-bg {background-color: var(--main-color);}
 .main-teal-bg {background-color: var(--main-teal);}
+.main-gun-metal {background-color: var(--gun-metal);}
 .light-grey-bg {background-color: var(--light-grey);}
 .blue-grey-bg {background-color: var(--blue-grey);}
 .red-bg {background-color: var(--red);}
-.main-red {color: var(--main-light-red);}
+.main-color {color: var(--main-color);}
 .white {color: var(--white);}
 .black {color: var(--black);}
 
@@ -47,6 +52,15 @@ h2 {
     padding-bottom: 5px;
     margin-top: 0 !important;
 }
+footer {
+    padding: 4rem 1.5rem 1.5rem !important;
+    font-size: .85em;
+}
+.logo {
+    font-family: var(--worksans);
+    font-size: 1.8rem !important;
+    font-weight: 400;
+}
 .white-space-nowrap {
     white-space: nowrap;
 }
@@ -56,8 +70,8 @@ h2 {
 }
 
 nav {
-    height: 100px;
-    line-height: 100px;
+    height: 80px;
+    line-height: 80px;
 }
 nav .navbar-item i {
     margin-right: 5px;
@@ -67,11 +81,11 @@ nav .navbar-item i {
     transition: var(--transition);
 }
 a.navbar-item:hover {
-    background-color: var(--main-light-red-hover) !important;
+    background-color: var(--main-color-hover) !important;
 }
 
 .section {
-    min-height: 74vh;
+    min-height: 80vh;
 }
 .content {
     position: relative;
@@ -102,12 +116,16 @@ a.navbar-item:hover {
     text-align: center;
 }
 
-.button.main-red-bg:hover {
-    background-color: var(--main-light-red-hover);
+.button.main-color-bg:hover {
+    background-color: var(--main-color-hover);
     color: var(--white);
 }
 .button.main-teal-bg:hover {
     background-color: var(--main-teal-hover);
+    color: var(--white);
+}
+.button.main-gun-metal:hover {
+    background-color: var(--gun-metal-hover);
     color: var(--white);
 }
 .button.light-grey-bg:hover {

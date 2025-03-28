@@ -10,7 +10,7 @@
                 <div class="box">
                     <div class="content">
 
-                        <h1>{{ title }} Page</h1>
+                        <h1>{{ title }}</h1>
 
                         {% with messages = get_flashed_messages() %}
                             {% if messages %}
@@ -35,15 +35,15 @@
 
                         <div class="field is-grouped">
                             <p class="control">
-                                <input class="button main-teal-bg white" type="submit" name="submit" id="submit" value="Submit">
+                                <input class="button light-grey-bg" type="submit" name="submit" id="submit" value={% if title == "Register" %}"Submit"{% else %}"Log In"{% endif %}>
                             </p>
 
                             <p class="control">
                                 {% if title == "Register" %}
-                                    <a class="button main-red-bg white"
+                                    <a class="button main-gun-metal white"
                                        href="{{ url_for('register_login_page.login') }}">Log in instead</a>
                                 {% else %}
-                                    <a class="button main-red-bg white"
+                                    <a class="button main-gun-metal white"
                                        href="{{ url_for('register_login_page.register') }}">Register</a>
                                 {% endif %}
                             </p>

@@ -8,7 +8,9 @@
     <title>{% block title %}Portfolio Data{% endblock %}</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="icon" href="../static/logo/favicon.ico">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -25,10 +27,10 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
 
-<footer class="footer blue-grey-bg">
+<footer class="footer">
   <div class="content has-text-centered">
-    <p class="white">
-      Build by Tony Pham. The source code is licensed <a class="white" href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+    <p>
+      Built by Tony Pham. The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
     </p>
   </div>
 </footer>
