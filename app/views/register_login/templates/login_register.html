@@ -33,14 +33,14 @@
                             {{ render_field(field) }}
                         {% endfor %}
 
-                        <div class="field is-grouped">
+                        <div class="field is-grouped is-justify-content-space-between">
                             <p class="control">
                                 <input class="button light-grey-bg" type="submit" name="submit" id="submit" value={% if title == "Register" %}"Submit"{% else %}"Log In"{% endif %}>
                             </p>
 
-                            <p class="control">
+                            <p class="control is-align-self-flex-end">
                                 {% if title == "Register" %}
-                                    <a class="button main-gun-metal white"
+                                    <a class="black has-text-weight-normal"
                                        href="{{ url_for('register_login_page.login') }}">Log in instead</a>
                                 {% else %}
                                     <a class="button main-gun-metal white"
