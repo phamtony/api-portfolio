@@ -14,6 +14,8 @@ Here's my personal online porfolio using portfolio-api: <a href="https://tonypha
 ## Usage
 You can make an account or you can test it out with the dummy credentials provided on the software.
 
+Make sure it's python version 3.10.13
+
 - Clone the project
 - make virtual env for the cloned project and activate the virtual env.
 ```angular2html
@@ -35,6 +37,11 @@ pip install psycopg2-binary
 and then run again:
 ```angular2html
 pip install -r requirements.txt
+```
+
+If everything is installed, run:
+```angular2html
+flask run
 ```
 
 ## Contribution
